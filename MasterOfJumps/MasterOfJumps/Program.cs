@@ -100,7 +100,7 @@ namespace MasterOfJumps
         }
         public static void WardJumpJax()
         {
-            Player.IssueOrder(GameObjectOrder.MoveTo, Player.Position.Extend(Game.CursorPos, 150));
+           // Player.IssueOrder(GameObjectOrder.MoveTo, Player.Position.Extend(Game.CursorPos, 150));
 
             if (QJax.IsReady())
             {
@@ -138,7 +138,7 @@ namespace MasterOfJumps
         }
         public static void WardJumpLee()
         {
-            Player.IssueOrder(GameObjectOrder.MoveTo, Player.Position.Extend(Game.CursorPos, 150));
+          //  Player.IssueOrder(GameObjectOrder.MoveTo, Player.Position.Extend(Game.CursorPos, 150));
 
             if (WLee.IsReady() && ObjectManager.Player.Spellbook.GetSpell(SpellSlot.W).Name == "BlindMonkWOne")
             {
@@ -177,7 +177,7 @@ namespace MasterOfJumps
         }
         public static void WardJumpKata()
         {
-            Player.IssueOrder(GameObjectOrder.MoveTo, Player.Position.Extend(Game.CursorPos, 150));
+       //     Player.IssueOrder(GameObjectOrder.MoveTo, Player.Position.Extend(Game.CursorPos, 150));
             if (EKata.IsReady())
             {
                 wardPosition = Game.CursorPos;

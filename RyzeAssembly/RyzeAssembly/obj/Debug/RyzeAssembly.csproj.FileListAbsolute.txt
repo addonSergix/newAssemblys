@@ -1,0 +1,14 @@
+C:\Users\sergi\Documents\Visual Studio 2015\Projects\RyzeAssembly\RyzeAssembly\bin\Debug\RyzeAssembly.exe.config
+C:\Users\sergi\Documents\Visual Studio 2015\Projects\RyzeAssembly\RyzeAssembly\bin\Debug\RyzeAssembly.exe
+C:\Users\sergi\Documents\Visual Studio 2015\Projects\RyzeAssembly\RyzeAssembly\bin\Debug\RyzeAssembly.pdb
+C:\Users\sergi\Documents\Visual Studio 2015\Projects\RyzeAssembly\RyzeAssembly\bin\Debug\LeagueSharp.Common.dll
+C:\Users\sergi\Documents\Visual Studio 2015\Projects\RyzeAssembly\RyzeAssembly\bin\Debug\LeagueSharp.dll
+C:\Users\sergi\Documents\Visual Studio 2015\Projects\RyzeAssembly\RyzeAssembly\bin\Debug\SharpDX.dll
+C:\Users\sergi\Documents\Visual Studio 2015\Projects\RyzeAssembly\RyzeAssembly\bin\Debug\SharpDX.Direct3D9.dll
+C:\Users\sergi\Documents\Visual Studio 2015\Projects\RyzeAssembly\RyzeAssembly\bin\Debug\LeagueSharp.Data.dll
+C:\Users\sergi\Documents\Visual Studio 2015\Projects\RyzeAssembly\RyzeAssembly\bin\Debug\clipper_library.dll
+C:\Users\sergi\Documents\Visual Studio 2015\Projects\RyzeAssembly\RyzeAssembly\bin\Debug\LeagueSharp.Sandbox.dll
+C:\Users\sergi\Documents\Visual Studio 2015\Projects\RyzeAssembly\RyzeAssembly\bin\Debug\Newtonsoft.Json.dll
+C:\Users\sergi\Documents\Visual Studio 2015\Projects\RyzeAssembly\RyzeAssembly\obj\Debug\RyzeAssembly.csprojResolveAssemblyReference.cache
+C:\Users\sergi\Documents\Visual Studio 2015\Projects\RyzeAssembly\RyzeAssembly\obj\Debug\RyzeAssembly.exe
+C:\Users\sergi\Documents\Visual Studio 2015\Projects\RyzeAssembly\RyzeAssembly\obj\Debug\RyzeAssembly.pdb
