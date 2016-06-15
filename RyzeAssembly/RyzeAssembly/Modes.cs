@@ -30,10 +30,10 @@ namespace RyzeAssembly
 
         private void LaneClear(RyzeMain ryze)
         {
-            var laneclearQ = true;
-            var laneclearW = true;
-            var laneclearE = true;
-            var laneclearR = true;
+            var laneclearQ = ryze.Menu.menu.Item("QL").GetValue<bool>(); ;
+            var laneclearW = ryze.Menu.menu.Item("WL").GetValue<bool>(); ;
+            var laneclearE = ryze.Menu.menu.Item("EL").GetValue<bool>(); ;
+            var laneclearR = ryze.Menu.menu.Item("RL").GetValue<bool>(); ;
             var minion = MinionManager.GetMinions(ryze.Spells.Q.Range, MinionTypes.All, MinionTeam.Enemy, MinionOrderTypes.MaxHealth).FirstOrDefault();
 
             if (minion != null )
@@ -61,10 +61,10 @@ namespace RyzeAssembly
 
         private static void JungleClear(RyzeMain ryze)
         {
-            var jungleclearQ = true;
-            var jungleclearW = true;
-            var jungleclearE = true;
-            var jungleclearR = true;
+            var jungleclearQ =  ryze.Menu.menu.Item("QJ").GetValue<bool>() ;
+            var jungleclearW = ryze.Menu.menu.Item("WJ").GetValue<bool>();
+            var jungleclearE = ryze.Menu.menu.Item("EJ").GetValue<bool>();
+            var jungleclearR = ryze.Menu.menu.Item("RJ").GetValue<bool>();
             var minion = MinionManager.GetMinions(ryze.Spells.Q.Range, MinionTypes.All, MinionTeam.Neutral, MinionOrderTypes.MaxHealth).FirstOrDefault();
             if (minion != null)
             {

@@ -19,7 +19,7 @@ namespace RyzeAssembly
         }
         public void loadMenu()
         {
-            Game.PrintChat("Hello");
+
             menu = new LeagueSharp.Common.Menu("Ryze", "Ryze", true);
             var orbWalkerMenu = new LeagueSharp.Common.Menu("Orbwalker", "Orbwalker");
       orb = new Orbwalking.Orbwalker(orbWalkerMenu);
