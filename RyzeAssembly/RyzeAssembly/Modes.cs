@@ -31,13 +31,13 @@ namespace RyzeAssembly
 
         private void LaneClear(RyzeMain ryze)
         {
-            var Mana = ryze.Menu.menu.Item("ManaL").GetValue<int>();
+            var Mana = ryze.Menu.menu.Item("ManaL").GetValue<Slider>().Value;
             var laneclearQ = ryze.Menu.menu.Item("QL").GetValue<bool>(); 
             var laneclearW = ryze.Menu.menu.Item("WL").GetValue<bool>(); 
             var laneclearE = ryze.Menu.menu.Item("EL").GetValue<bool>(); 
             var laneclearR = ryze.Menu.menu.Item("RL").GetValue<bool>(); 
             var minion = MinionManager.GetMinions(ryze.Spells.Q.Range, MinionTypes.All, MinionTeam.Enemy, MinionOrderTypes.MaxHealth).FirstOrDefault();
-            if (ryze.Hero.ManaPercent <= Mana)
+            if (ryze.Hero.ManaPercent > Mana)
                 if (minion != null )
             {
                 if (laneclearQ && ryze.Spells.Q.IsReady())
@@ -63,13 +63,13 @@ namespace RyzeAssembly
 
         private static void JungleClear(RyzeMain ryze)
         {
-            var Mana = ryze.Menu.menu.Item("ManaJ").GetValue<int>();
+            var Mana = ryze.Menu.menu.Item("ManaJ").GetValue<Slider>().Value;
             var jungleclearQ =  ryze.Menu.menu.Item("QJ").GetValue<bool>() ;
             var jungleclearW = ryze.Menu.menu.Item("WJ").GetValue<bool>();
             var jungleclearE = ryze.Menu.menu.Item("EJ").GetValue<bool>();
             var jungleclearR = ryze.Menu.menu.Item("RJ").GetValue<bool>();
             var minion = MinionManager.GetMinions(ryze.Spells.Q.Range, MinionTypes.All, MinionTeam.Neutral, MinionOrderTypes.MaxHealth).FirstOrDefault();
-            if (ryze.Hero.ManaPercent <= Mana)
+            if (ryze.Hero.ManaPercent > Mana)
                 if (minion != null)
             {
                 if (jungleclearQ && ryze.Spells.Q.IsReady())
@@ -94,8 +94,8 @@ namespace RyzeAssembly
         private void mixed(RyzeMain ryze)
         {
             var Q = ryze.Menu.menu.Item("QH").GetValue<bool>();
-            var Mana = ryze.Menu.menu.Item("ManaH").GetValue<int>();
-            if (ryze.Hero.ManaPercent<=Mana)
+            var Mana = ryze.Menu.menu.Item("ManaH").GetValue<Slider>().Value;
+            if (ryze.Hero.ManaPercent>Mana)
             if(Q)
             ryze.Spells.qCastPred();
         }
@@ -143,7 +143,7 @@ namespace RyzeAssembly
         }
         public void Combo(RyzeMain ryze)
         {
-
+            var Heal = ryze.Menu.menu.Item("%R").GetValue<Slider>().Value;
             if (functions != null)
             {
                 if (i < functions.Count)
@@ -165,6 +165,13 @@ namespace RyzeAssembly
                     rev = false;
                 }
 
+            }
+            else
+            {
+                if(ryze.Hero.HealthPercent<=Heal)
+                {
+                    ryze.Spells.R.Cast();
+                }
             }
             var target = TargetSelector.GetTarget(600, TargetSelector.DamageType.Magical);
 

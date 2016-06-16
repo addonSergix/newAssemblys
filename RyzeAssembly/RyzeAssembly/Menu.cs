@@ -10,7 +10,7 @@ namespace RyzeAssembly
 {
     class Menu
     {
-        private LeagueSharp.Common.Menu _drawSettingsMenu, _laneclearMenu, _jungleclearMenu, _harrashMenu;
+        private LeagueSharp.Common.Menu _drawSettingsMenu, _laneclearMenu, _jungleclearMenu, _harrashMenu,_miscMenu;
       public LeagueSharp.Common.Menu menu;
         public Orbwalking.Orbwalker orb;
         public Menu()
@@ -28,14 +28,15 @@ namespace RyzeAssembly
             loadDrawings();
             loadJungleClear();
             loadHarassh();
-
+            loadMisc();
             TargetSelector.AddToMenu(TargetSelectorMenu);
             menu.AddSubMenu(orbWalkerMenu);        //ORBWALKER
             menu.AddSubMenu(TargetSelectorMenu);   //TS
-                                                   // menu.AddSubMenu(itemMenu);
+                                                 // menu.AddSubMenu(itemMenu);
             menu.AddSubMenu(_harrashMenu);
            menu.AddSubMenu(_laneclearMenu);        //LANECLEAR
            menu.AddSubMenu(_jungleclearMenu);      //JUNGLECLEAR
+            menu.AddSubMenu(_miscMenu);
             menu.AddSubMenu(_drawSettingsMenu);     //DRAWS
             menu.AddToMainMenu();
         }
@@ -48,7 +49,13 @@ namespace RyzeAssembly
                 _harrashMenu.AddItem(new MenuItem("ManaH", "% mana Harrash").SetValue(new Slider(40,0,100)));
             }
         }
-    
+    public void loadMisc()
+        {
+            _miscMenu = new LeagueSharp.Common.Menu("Misc", "Misc");
+        {
+                _miscMenu.AddItem(new MenuItem("%R", "% R heal ").SetValue(new Slider(30, 0, 100)));
+            }
+        }
         public void loadLaneClear()
         {
            _laneclearMenu = new LeagueSharp.Common.Menu("Laneclear", "Laneclear");
