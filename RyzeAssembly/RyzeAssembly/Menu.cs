@@ -26,16 +26,16 @@ namespace RyzeAssembly
             var TargetSelectorMenu = new LeagueSharp.Common.Menu("TargetSelector", "TargetSelector");
             loadLaneClear();
             loadDrawings();
-          //  loadJungleClear();
-          //  loadHarassh();
+            loadJungleClear();
+            loadHarassh();
 
             TargetSelector.AddToMenu(TargetSelectorMenu);
             menu.AddSubMenu(orbWalkerMenu);        //ORBWALKER
             menu.AddSubMenu(TargetSelectorMenu);   //TS
                                                    // menu.AddSubMenu(itemMenu);
-            //menu.AddSubMenu(_harrashMenu);
+            menu.AddSubMenu(_harrashMenu);
            menu.AddSubMenu(_laneclearMenu);        //LANECLEAR
-           // menu.AddSubMenu(_jungleclearMenu);      //JUNGLECLEAR
+           menu.AddSubMenu(_jungleclearMenu);      //JUNGLECLEAR
             menu.AddSubMenu(_drawSettingsMenu);     //DRAWS
             menu.AddToMainMenu();
         }
@@ -45,6 +45,7 @@ namespace RyzeAssembly
             _harrashMenu = new LeagueSharp.Common.Menu("Harrash", "Harrash");
             {
                 _harrashMenu.AddItem(new MenuItem("QH", "Use Q in Harrash").SetValue(true));
+                _harrashMenu.AddItem(new MenuItem("ManaH", "% mana Harrash").SetValue(new Slider(40,0,100)));
             }
         }
     
@@ -56,6 +57,7 @@ namespace RyzeAssembly
                 _laneclearMenu.AddItem(new MenuItem("WL", "Use W in Laneclear").SetValue(true));
                _laneclearMenu.AddItem(new MenuItem("EL", "Use E in Laneclear").SetValue(true));
                 _laneclearMenu.AddItem(new MenuItem("RL", "Use R in Laneclear").SetValue(true));
+                _laneclearMenu.AddItem(new MenuItem("ManaL", "% mana LaneClear").SetValue(new Slider(40, 0, 100)));
             }
       
         }
@@ -67,7 +69,7 @@ namespace RyzeAssembly
                 _jungleclearMenu.AddItem(new MenuItem("WJ", "Use W in JungleClear").SetValue(true));
                 _jungleclearMenu.AddItem(new MenuItem("EJ", "Use E in JungleClear").SetValue(true));
                 _jungleclearMenu.AddItem(new MenuItem("RJ", "Use R in JungleClear").SetValue(true));
-
+                _jungleclearMenu.AddItem(new MenuItem("ManaJ", "% mana JungleClear").SetValue(new Slider(40, 0, 100)));
             }
         }
         public void loadDrawings()

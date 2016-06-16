@@ -12,7 +12,8 @@ namespace RyzeAssembly
     {
         public void Update(RyzeMain ryze)
         {
-           ryze.Spells.igniteCast();
+          
+            ryze.Spells.igniteCast();
          switch(ryze.Menu.orb.ActiveMode)
             {
                 case LeagueSharp.Common.Orbwalking.OrbwalkingMode.Combo:
@@ -30,13 +31,14 @@ namespace RyzeAssembly
 
         private void LaneClear(RyzeMain ryze)
         {
-            var laneclearQ = ryze.Menu.menu.Item("QL").GetValue<bool>(); ;
-            var laneclearW = ryze.Menu.menu.Item("WL").GetValue<bool>(); ;
-            var laneclearE = ryze.Menu.menu.Item("EL").GetValue<bool>(); ;
-            var laneclearR = ryze.Menu.menu.Item("RL").GetValue<bool>(); ;
+            var Mana = ryze.Menu.menu.Item("ManaL").GetValue<int>();
+            var laneclearQ = ryze.Menu.menu.Item("QL").GetValue<bool>(); 
+            var laneclearW = ryze.Menu.menu.Item("WL").GetValue<bool>(); 
+            var laneclearE = ryze.Menu.menu.Item("EL").GetValue<bool>(); 
+            var laneclearR = ryze.Menu.menu.Item("RL").GetValue<bool>(); 
             var minion = MinionManager.GetMinions(ryze.Spells.Q.Range, MinionTypes.All, MinionTeam.Enemy, MinionOrderTypes.MaxHealth).FirstOrDefault();
-
-            if (minion != null )
+            if (ryze.Hero.ManaPercent <= Mana)
+                if (minion != null )
             {
                 if (laneclearQ && ryze.Spells.Q.IsReady())
                 {
@@ -61,12 +63,14 @@ namespace RyzeAssembly
 
         private static void JungleClear(RyzeMain ryze)
         {
+            var Mana = ryze.Menu.menu.Item("ManaJ").GetValue<int>();
             var jungleclearQ =  ryze.Menu.menu.Item("QJ").GetValue<bool>() ;
             var jungleclearW = ryze.Menu.menu.Item("WJ").GetValue<bool>();
             var jungleclearE = ryze.Menu.menu.Item("EJ").GetValue<bool>();
             var jungleclearR = ryze.Menu.menu.Item("RJ").GetValue<bool>();
             var minion = MinionManager.GetMinions(ryze.Spells.Q.Range, MinionTypes.All, MinionTeam.Neutral, MinionOrderTypes.MaxHealth).FirstOrDefault();
-            if (minion != null)
+            if (ryze.Hero.ManaPercent <= Mana)
+                if (minion != null)
             {
                 if (jungleclearQ && ryze.Spells.Q.IsReady())
                 {
@@ -89,6 +93,10 @@ namespace RyzeAssembly
         }
         private void mixed(RyzeMain ryze)
         {
+            var Q = ryze.Menu.menu.Item("QH").GetValue<bool>();
+            var Mana = ryze.Menu.menu.Item("ManaH").GetValue<int>();
+            if (ryze.Hero.ManaPercent<=Mana)
+            if(Q)
             ryze.Spells.qCastPred();
         }
 
@@ -135,6 +143,7 @@ namespace RyzeAssembly
         }
         public void Combo(RyzeMain ryze)
         {
+
             if (functions != null)
             {
                 if (i < functions.Count)
@@ -157,7 +166,6 @@ namespace RyzeAssembly
                 }
 
             }
-
             var target = TargetSelector.GetTarget(600, TargetSelector.DamageType.Magical);
 
             if (target != null)
@@ -265,11 +273,7 @@ namespace RyzeAssembly
 
                 }
             }
-            else
-            {
-
-
-            }
+        
         }
         public bool sendSpell(string s, RyzeMain ryze)
         {
