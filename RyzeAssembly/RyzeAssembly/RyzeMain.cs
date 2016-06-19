@@ -68,8 +68,16 @@ namespace RyzeAssembly
             _modes = new Modes();
             _menu = new Menu();
             Obj_AI_Base.OnProcessSpellCast += OnProcessSpell;
+            AntiGapcloser.OnEnemyGapcloser += AntiGapcloser_OnEnemyGapcloser;
             Drawing.OnDraw += draw;
             Game.OnUpdate += update;
+        }
+
+        private void AntiGapcloser_OnEnemyGapcloser(ActiveGapcloser gapcloser)
+        {
+            if(_modes.Functions!=null)
+            if(gapcloser.Sender.IsAttackingPlayer)
+            _spells.W.Cast(gapcloser.Sender);
         }
 
         private void OnProcessSpell(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
