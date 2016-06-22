@@ -1,4 +1,5 @@
-﻿using LeagueSharp;
+﻿using Azir_Free_elo_Machine;
+using LeagueSharp;
 using LeagueSharp.Common;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ namespace Azir_Creator_of_Elo
 {
     class AzirMain
     {
+        public Azir_Free_elo_Machine.AzirWalker walker;
         private Spells _spells;
         public Menu _menu;
         public Modes _modes;
@@ -47,7 +49,7 @@ namespace Azir_Creator_of_Elo
             _modes = new AzirModes(this);
             Game.OnUpdate += OnUpdate;
             Drawing.OnDraw += Ondraw;
-      //      walker = new AzirWalker(Menu.GetMenu.SubMenu("Orbwalker"));
+          walker = new AzirWalker(Menu.GetMenu.SubMenu("Orbwalker"),this);
         }
 
         private void Ondraw(EventArgs args)
