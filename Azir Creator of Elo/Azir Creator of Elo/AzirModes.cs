@@ -86,6 +86,7 @@ namespace Azir_Creator_of_Elo
                             azir.Spells.W.Cast(azir.Hero.Position.Extend(target.ServerPosition, 450));
                 }
                 azir.Spells.castQ(azir, target, useQ, nSoldiersToQ);
+             
             }
         }
         public override void Laneclear(AzirMain azir)

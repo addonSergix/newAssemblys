@@ -1,0 +1,13 @@
+C:\Users\sergi\documents\visual studio 2015\Projects\Azir Creator of Elo\Azir Creator of Elo\bin\Debug\Azir Creator of Elo.exe.config
+C:\Users\sergi\documents\visual studio 2015\Projects\Azir Creator of Elo\Azir Creator of Elo\bin\Debug\Azir Creator of Elo.exe
+C:\Users\sergi\documents\visual studio 2015\Projects\Azir Creator of Elo\Azir Creator of Elo\bin\Debug\Azir Creator of Elo.pdb
+C:\Users\sergi\documents\visual studio 2015\Projects\Azir Creator of Elo\Azir Creator of Elo\bin\Debug\LeagueSharp.Common.dll
+C:\Users\sergi\documents\visual studio 2015\Projects\Azir Creator of Elo\Azir Creator of Elo\bin\Debug\LeagueSharp.dll
+C:\Users\sergi\documents\visual studio 2015\Projects\Azir Creator of Elo\Azir Creator of Elo\bin\Debug\SharpDX.dll
+C:\Users\sergi\documents\visual studio 2015\Projects\Azir Creator of Elo\Azir Creator of Elo\bin\Debug\SharpDX.Direct3D9.dll
+C:\Users\sergi\documents\visual studio 2015\Projects\Azir Creator of Elo\Azir Creator of Elo\bin\Debug\LeagueSharp.Data.dll
+C:\Users\sergi\documents\visual studio 2015\Projects\Azir Creator of Elo\Azir Creator of Elo\bin\Debug\clipper_library.dll
+C:\Users\sergi\documents\visual studio 2015\Projects\Azir Creator of Elo\Azir Creator of Elo\bin\Debug\LeagueSharp.Sandbox.dll
+C:\Users\sergi\documents\visual studio 2015\Projects\Azir Creator of Elo\Azir Creator of Elo\bin\Debug\Newtonsoft.Json.dll
+C:\Users\sergi\documents\visual studio 2015\Projects\Azir Creator of Elo\Azir Creator of Elo\obj\Debug\Azir Creator of Elo.exe
+C:\Users\sergi\documents\visual studio 2015\Projects\Azir Creator of Elo\Azir Creator of Elo\obj\Debug\Azir Creator of Elo.pdb
