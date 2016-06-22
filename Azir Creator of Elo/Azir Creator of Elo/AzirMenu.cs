@@ -59,7 +59,7 @@ namespace Azir_Creator_of_Elo
         }
         public void loadLaneClearMenu()
         {
-            _laneClearMenu = new LeagueSharp.Common.Menu("JungleClear Menu", "JungleClear Menu");
+            _laneClearMenu = new LeagueSharp.Common.Menu("Laneclear Menu", "Laneclear Menu");
             {
                 _laneClearMenu.AddItem(new MenuItem("LQ", "Use Q").SetValue(true));
                 _laneClearMenu.AddItem(new MenuItem("LW", "Use W").SetValue(true));
@@ -68,7 +68,7 @@ namespace Azir_Creator_of_Elo
         }
         public void loadJungleClearMenu()
         {
-            _JungleClearMenu = new LeagueSharp.Common.Menu("Laneclear Menu", "Laneclear Menu");
+            _JungleClearMenu = new LeagueSharp.Common.Menu("JungleClear Menu", "JungleClear  Menu");
             {
                 _JungleClearMenu.AddItem(new MenuItem("JW", "Use W").SetValue(true));
 

@@ -34,9 +34,11 @@ namespace Azir_Creator_of_Elo
         }
         public void Insec(AzirMain azir)
         {
-            var ts = TargetSelector.GetTarget(900, TargetSelector.DamageType.Magical);
+            var ts = TargetSelector.GetTarget(azir.Spells.Q.Range, TargetSelector.DamageType.Magical);
             if (ts != null)
             {
+
+                if(azir.Spells.R.IsReady())
                 jump.insec(ts);
               
                     }
@@ -66,13 +68,20 @@ namespace Azir_Creator_of_Elo
                     var pred = azir.Spells.W.GetPrediction(target);
                     if (pred.Hitchance >= HitChance.Medium)
                     {
-                        if (useW&&!(savew&&(wCount==0)))
-                            azir.Spells.W.Cast(pred.CastPosition);
+                        if (savew && (wCount == 0))
+                        {
+
+                        }
+                        else
+                        {
+                            if (useW)
+                                azir.Spells.W.Cast(pred.CastPosition);
+                        }
                     }
                 }
                 else
                 {
-                    if (azir.Spells.Q.Level > 0 && azir.Spells.Q.IsReady())
+                    if (azir.Spells.Q.Level > 0 && azir.Spells.Q.IsReady()&& !(savew && (wCount == 0)))
                         if (useW)
                             azir.Spells.W.Cast(azir.Hero.Position.Extend(target.ServerPosition, 450));
                 }
