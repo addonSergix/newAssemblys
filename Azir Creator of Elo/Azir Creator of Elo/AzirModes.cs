@@ -81,7 +81,8 @@ namespace Azir_Creator_of_Elo
                 }
                 else
                 {
-                    if (azir.Spells.Q.Level > 0 && azir.Spells.Q.IsReady()&& !(savew && (wCount == 0)))
+                    if (azir.Spells.Q.Level > 0 && azir.Spells.Q.IsReady())
+                        if((!savew &&(savew&& (wCount > 0))))
                         if (useW)
                             azir.Spells.W.Cast(azir.Hero.Position.Extend(target.ServerPosition, 450));
                 }
