@@ -1,6 +1,7 @@
 ﻿using Azir_Free_elo_Machine;
 using LeagueSharp;
 using LeagueSharp.Common;
+using SharpDX;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,7 +52,10 @@ namespace Azir_Creator_of_Elo
             Drawing.OnDraw += Ondraw;
           walker = new AzirWalker(Menu.GetMenu.SubMenu("Orbwalker"),this);
         }
-
+        public  void Orbwalk(Vector3 pos, Obj_AI_Hero target = null)
+        {
+           Hero.IssueOrder(GameObjectOrder.MoveTo, pos);
+        }
         private void Ondraw(EventArgs args)
         {
             // var ts = TargetSelector.GetSelectedTarget();
