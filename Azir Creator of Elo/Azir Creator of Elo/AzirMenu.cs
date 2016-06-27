@@ -44,7 +44,7 @@ namespace Azir_Creator_of_Elo
             {
                 _drawSettingsMenu.AddItem(new MenuItem("dsl", "Draw Soldier Line").SetValue(true));
                 _drawSettingsMenu.AddItem(new MenuItem("dcr", "Draw Control range").SetValue(true));
-
+                _drawSettingsMenu.AddItem(new MenuItem("dfr", "Draw Flee range").SetValue(true));
             }
         }
         public  void loadComboMenu()
