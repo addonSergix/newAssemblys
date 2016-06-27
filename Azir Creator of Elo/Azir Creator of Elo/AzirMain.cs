@@ -87,9 +87,9 @@ namespace Azir_Creator_of_Elo
                 }
             if(drawFleeMaxRange)
             {
-               // var pos = HeroManager.Player.Position.Extend(Game.CursorPos, 450);
-                var pos2 = HeroManager.Player.Position.Extend(Game.CursorPos, 1150+350);
-                Drawing.DrawCircle(pos2, 1150 + 350, System.Drawing.Color.GreenYellow);
+                // var pos = HeroManager.Player.Position.Extend(Game.CursorPos, 450);
+
+                Render.Circle.DrawCircle(Hero.Position, 1150 + 350, System.Drawing.Color.GreenYellow);
             }
 
 
