@@ -52,7 +52,7 @@ namespace Azir_Creator_of_Elo
             Drawing.OnDraw += Ondraw;
           walker = new AzirWalker(Menu.GetMenu.SubMenu("Orbwalker"),this);
         }
-        public  void Orbwalk(Vector3 pos, Obj_AI_Hero target = null)
+        public  void Orbwalk(Vector3 pos)
         {
            Hero.IssueOrder(GameObjectOrder.MoveTo, pos);
         }

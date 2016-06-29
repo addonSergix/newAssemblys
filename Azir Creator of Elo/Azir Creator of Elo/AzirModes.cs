@@ -19,8 +19,8 @@ namespace Azir_Creator_of_Elo
         {
 
             base.Update(azir);
-       
-      
+
+         
 
             if (azir.Menu.GetMenu.Item("fleekey").GetValue<KeyBind>().Active)
             {
@@ -30,6 +30,7 @@ namespace Azir_Creator_of_Elo
 
             if (azir.Menu.GetMenu.Item("inseckey").GetValue<KeyBind>().Active)
             {
+                azir.Orbwalk(Game.CursorPos);
                 Insec(azir);
             }
         }
