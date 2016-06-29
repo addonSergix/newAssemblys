@@ -62,7 +62,7 @@ namespace Azir_Creator_of_Elo
         }
         public void insec(Obj_AI_Hero target)
         {
-
+            // si esta en rango tira la r
             if (azir.Hero.Distance(target) <= azir.Spells.R.Range)
             {
            
@@ -79,8 +79,9 @@ namespace Azir_Creator_of_Elo
 
             }
             else {
-                var pos = Game.CursorPos.Extend(target.Position, Game.CursorPos.Distance(target.Position) - 250);
-                if (pos.Distance(azir.Hero.ServerPosition) <= 1300)
+                // si no hace flee
+                var pos = Game.CursorPos.Extend(target.Position, Game.CursorPos.Distance(target.Position)  +100);
+                if (pos.Distance(azir.Hero.ServerPosition) <= 1150 + 350)
                 {
                     fleeTopos(pos);
                 }
