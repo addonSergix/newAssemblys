@@ -54,7 +54,7 @@ namespace Azir_Creator_of_Elo
                 _comboMenu.AddItem(new MenuItem("SoldiersToQ", "Soldiers to Q").SetValue(new Slider(1, 1, 3)));
                 _comboMenu.AddItem(new MenuItem("CQ", "Use Q").SetValue(true));
                 _comboMenu.AddItem(new MenuItem("CW", "Use W").SetValue(true));
-
+                _comboMenu.AddItem(new MenuItem("CR", "Use R killeable").SetValue(true));
             }
         }
         public void loadLaneClearMenu()

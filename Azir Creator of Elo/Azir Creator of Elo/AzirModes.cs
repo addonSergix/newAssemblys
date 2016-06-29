@@ -175,7 +175,11 @@ namespace Azir_Creator_of_Elo
                     azir.Spells.W.Cast(azir.Hero.Position.Extend(target.ServerPosition, 450));
                 }
                 azir.Spells.castQ(azir,target,useQ,nSoldiersToQ);
-             
+                if (azir.Menu.GetMenu.Item("CR").GetValue<bool>())
+                {
+                    if (target.Health < azir.Spells.R.GetDamage(target))
+                        azir.Spells.R.Cast(target);
+                }
             }
    
         }
