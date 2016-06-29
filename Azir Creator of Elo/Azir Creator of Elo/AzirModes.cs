@@ -28,10 +28,10 @@ namespace Azir_Creator_of_Elo
                 Jump(azir);
             }
 
-       /*     if (azir.Menu.GetMenu.Item("inseckey").GetValue<KeyBind>().Active)
+            if (azir.Menu.GetMenu.Item("inseckey").GetValue<KeyBind>().Active)
             {
                 Insec(azir);
-            }*/
+            }
         }
         public void Insec(AzirMain azir)
         {

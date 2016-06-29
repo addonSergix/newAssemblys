@@ -65,9 +65,7 @@ namespace Azir_Creator_of_Elo
 
             if (azir.Hero.Distance(target) <= azir.Spells.R.Range)
             {
-                azir.Hero.IssueOrder(GameObjectOrder.MoveTo, target);
-                if (azir.Hero.Distance(target) < 220)
-                {
+           
                     var tower = ObjectManager.Get<Obj_AI_Turret>().FirstOrDefault(it => it.IsAlly && it.IsValidTarget(1000));
 
                     if (tower != null)
@@ -76,14 +74,17 @@ namespace Azir_Creator_of_Elo
                     }
 
                     if (azir.Spells.R.Cast(Game.CursorPos)) return;
-                }
+                
 
 
             }
             else {
+                azir.Orbwalk(Game.CursorPos);
                 var pos = Game.CursorPos.Extend(target.Position, Game.CursorPos.Distance(target.Position) - 250);
-
-           fleeTopos(pos);
+                if (pos.Distance(azir.Hero.ServerPosition) <= 1300)
+                {
+                    fleeTopos(pos);
+                }
                     }
     
         }
