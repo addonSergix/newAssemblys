@@ -45,7 +45,7 @@ namespace Azir_Creator_of_Elo
                     if (pred.Hitchance >= HitChance.High)
                     {
                         if (useQ)
-                            azir.Spells.Q.Cast(pred.CastPosition.Extend(target.ServerPosition,50));
+                            azir.Spells.Q.Cast(pred.CastPosition.Extend(target.ServerPosition,80));
                     }
                 }
             }
