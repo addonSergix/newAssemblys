@@ -32,23 +32,9 @@ namespace Azir_Creator_of_Elo
             //  ignite = ObjectManager.Player.GetSpellSlot("SummonerDot");
         }
 
-        internal void flyToInsec(Vector3 pos, AzirMain azir, Obj_AI_Hero ts)
-        {
-            throw new NotImplementedException();
-        }
+    
 
-        public void flyToinsec(Vector3 position, AzirMain azir, Obj_AI_Hero ts)
-        {
-            if (W.IsReady() && Q.IsReady() && E.IsReady())//&&R.IsReady())
-            {
-                W.Cast(HeroManager.Player.Position.Extend(position, 450));
-                Utility.DelayAction.Add(Game.Ping + 150, () => E.Cast(azir.soldierManager.Soldiers[azir.soldierManager.Soldiers.Count - 1].ServerPosition));
-                Utility.DelayAction.Add(Game.Ping + 200, () => Q.Cast(HeroManager.Player.Position.Extend(position, 1150)));
-                Utility.DelayAction.Add(Game.Ping + 400, () => azir.Hero.IssueOrder(GameObjectOrder.MoveTo, position.Extend(HeroManager.Player.Position, 300)));
-                Utility.DelayAction.Add(Game.Ping + 800, () => azir.Spells.R.Cast(position.Extend(ts.Position, 300)));
-
-            }
-        }
+     
         public void castQ(AzirMain azir, Obj_AI_Hero target, bool useQ, int nSoldiersToQ)
         {
             if (target.isRunningOfYou())
@@ -59,7 +45,7 @@ namespace Azir_Creator_of_Elo
                     if (pred.Hitchance >= HitChance.High)
                     {
                         if (useQ)
-                            azir.Spells.Q.Cast(pred.CastPosition);
+                            azir.Spells.Q.Cast(pred.CastPosition.Extend(target.ServerPosition,50));
                     }
                 }
             }

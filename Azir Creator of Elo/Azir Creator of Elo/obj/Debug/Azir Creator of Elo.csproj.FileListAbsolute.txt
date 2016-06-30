@@ -9,6 +9,5 @@ C:\Users\sergi\Documents\GitHub\newAssemblys\Azir Creator of Elo\Azir Creator of
 C:\Users\sergi\Documents\GitHub\newAssemblys\Azir Creator of Elo\Azir Creator of Elo\bin\Debug\clipper_library.dll
 C:\Users\sergi\Documents\GitHub\newAssemblys\Azir Creator of Elo\Azir Creator of Elo\bin\Debug\LeagueSharp.Sandbox.dll
 C:\Users\sergi\Documents\GitHub\newAssemblys\Azir Creator of Elo\Azir Creator of Elo\bin\Debug\Newtonsoft.Json.dll
-C:\Users\sergi\Documents\GitHub\newAssemblys\Azir Creator of Elo\Azir Creator of Elo\obj\Debug\Azir Creator of Elo.csprojResolveAssemblyReference.cache
 C:\Users\sergi\Documents\GitHub\newAssemblys\Azir Creator of Elo\Azir Creator of Elo\obj\Debug\Azir Free elo Machine.exe
 C:\Users\sergi\Documents\GitHub\newAssemblys\Azir Creator of Elo\Azir Creator of Elo\obj\Debug\Azir Free elo Machine.pdb

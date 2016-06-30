@@ -54,7 +54,7 @@ namespace Azir_Creator_of_Elo
         }
         public  void Orbwalk(Vector3 pos)
         {
-           Hero.IssueOrder(GameObjectOrder.MoveTo, pos);
+            Orbwalking.Orbwalk(null, pos);
         }
         private void Ondraw(EventArgs args)
         {

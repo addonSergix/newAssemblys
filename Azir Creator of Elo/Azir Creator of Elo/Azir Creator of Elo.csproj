@@ -59,6 +59,7 @@
     <Compile Include="AzirModes.cs" />
     <Compile Include="AzirWalker.cs" />
     <Compile Include="Extensions.cs" />
+    <Compile Include="Insec.cs" />
     <Compile Include="Jump.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="Modes.cs" />

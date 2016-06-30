@@ -1,4 +1,5 @@
-﻿using LeagueSharp;
+﻿using Azir_Free_elo_Machine;
+using LeagueSharp;
 using LeagueSharp.Common;
 using System;
 using System.Collections.Generic;
@@ -11,9 +12,11 @@ namespace Azir_Creator_of_Elo
     class AzirModes : Modes
     {
         public JumpLogic jump;
+        public Insec insec;
         public AzirModes(AzirMain azir)
         {
             jump = new JumpLogic(azir);
+            insec = new Insec(azir);
         }
         public override void Update(AzirMain azir)
         {
@@ -28,13 +31,9 @@ namespace Azir_Creator_of_Elo
                 Jump(azir);
             }
 
-            if (azir.Menu.GetMenu.Item("inseckey").GetValue<KeyBind>().Active)
-            {
-                azir.Orbwalk(Game.CursorPos);
-                Insec(azir);
-            }
+     
         }
-        public void Insec(AzirMain azir)
+    /*    public void Insec(AzirMain azir)
         {
             var ts = TargetSelector.GetTarget(azir.Spells.Q.Range, TargetSelector.DamageType.Magical);
             if (ts != null)
@@ -44,7 +43,7 @@ namespace Azir_Creator_of_Elo
                 jump.insec(ts);
               
                     }
-        }
+        }*/
         public  void Jump(AzirMain azir)
         {
             jump.updateLogic(Game.CursorPos);
