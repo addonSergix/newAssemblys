@@ -70,7 +70,7 @@ namespace Azir_Free_elo_Machine
 
                 if (soldier == null)
                     soldier = azir.soldierManager.ActiveSoldiers
-                .Where(x => azir.Hero.Distance(x.Position) <= 900)
+                .Where(x => x.Distance(pos) <= 900)
                 .OrderBy(x => x.Position.Distance(target.Position)).FirstOrDefault();
                 if (soldier == null)
                 {
