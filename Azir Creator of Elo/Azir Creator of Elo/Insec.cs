@@ -65,7 +65,7 @@ namespace Azir_Free_elo_Machine
             }
 
                 var pos = target.ServerPosition.Extend(Game.CursorPos, -300);
-            if (pos.Distance(target.ServerPosition) <= 1100)
+            if (pos.Distance(azir.Hero.ServerPosition) <= 1100)
             {
 
                 if (soldier == null)
