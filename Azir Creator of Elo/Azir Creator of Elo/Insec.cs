@@ -62,7 +62,7 @@ namespace Azir_Free_elo_Machine
             var target = TargetSelector.GetSelectedTarget();
             if (!target.IsValidTarget() || target.IsZombie)
                 return;
-            if (azir.Hero.Distance(target) <= azir.Spells.R.Range)
+            if (azir.Hero.Distance(target) <= azir.Spells.R.Range&&!azir.Hero.IsDashing())
             {
 
                 var tower = ObjectManager.Get<Obj_AI_Turret>().FirstOrDefault(it => it.IsAlly && it.IsValidTarget(1000));
