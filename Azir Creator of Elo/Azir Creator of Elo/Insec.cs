@@ -34,8 +34,11 @@ namespace Azir_Free_elo_Machine
                  }*/
             if (target != null)
             {
-                var pos = target.ServerPosition.Extend(Game.CursorPos, -300);
-                Render.Circle.DrawCircle(pos, 100, System.Drawing.Color.GreenYellow);
+                if (target.IsVisible&&target.IsValid)
+                {
+                    var pos = target.ServerPosition.Extend(Game.CursorPos, -300);
+                    Render.Circle.DrawCircle(pos, 100, System.Drawing.Color.GreenYellow);
+                }
             }
 
         }
@@ -59,12 +62,23 @@ namespace Azir_Free_elo_Machine
             var target = TargetSelector.GetSelectedTarget();
             if (!target.IsValidTarget() || target.IsZombie)
                 return;
-            if (target.Distance(azir.Hero)<azir.Spells.R.Range)
+            if (azir.Hero.Distance(target) <= azir.Spells.R.Range)
             {
-                azir.Spells.R.Cast(Game.CursorPos);
+
+                var tower = ObjectManager.Get<Obj_AI_Turret>().FirstOrDefault(it => it.IsAlly && it.IsValidTarget(1000));
+
+                if (tower != null)
+                {
+                    if (azir.Spells.R.Cast(tower.ServerPosition)) return;
+                }
+
+                if (azir.Spells.R.Cast(Game.CursorPos)) return;
+
+
+
             }
 
-                var pos = target.ServerPosition.Extend(Game.CursorPos, -300);
+            var pos = target.ServerPosition.Extend(Game.CursorPos, -300);
             if (pos.Distance(azir.Hero.ServerPosition) <= 1100)
             {
 
