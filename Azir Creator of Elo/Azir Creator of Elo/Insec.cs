@@ -26,30 +26,56 @@ namespace Azir_Free_elo_Machine
 
         private void Drawing_OnDraw(EventArgs args)
         {
+            if (!azir.Menu.GetMenu.Item("inseckey").GetValue<KeyBind>().Active)
+            {
+
+                return;
+            }
             var target = TargetSelector.GetSelectedTarget();
             /*     var posWs = GeoAndExten.GetWsPosition(target.Position.To2D()).Where(x => x != null);
                  foreach (var posW in posWs)
                  {
 
                  }*/
-            if (target != null)
+            if (Clickposition == new Vector3(0, 0, 0))
             {
-                if (target.IsVisible&&target.IsValid)
+                if (target != null)
                 {
-                    var pos = target.ServerPosition.Extend(Game.CursorPos, -300);
-                    Render.Circle.DrawCircle(pos, 100, System.Drawing.Color.GreenYellow);
+                    if (target.IsVisible && target.IsValid)
+                    {
+                        var pos = target.ServerPosition.Extend(Game.CursorPos, -300);
+                        Render.Circle.DrawCircle(pos, 100, System.Drawing.Color.GreenYellow);
+                    }
                 }
+            }
+            else
+            {
+                Render.Circle.DrawCircle(Clickposition, 100, System.Drawing.Color.GreenYellow);
             }
 
         }
+        Vector3 Clickposition;
         private void Game_OnWndProc(WndEventArgs args)
         {
-            
-        }
+     
+            if (args.Msg == (uint)WindowsMessages.WM_KEYDOWN)
+            {
+                if (Clickposition == new Vector3(0,0,0))
+                    Clickposition = Game.CursorPos;
+                else
+                    Clickposition = new Vector3(0,0,0);
+            }
+
+    }
         Obj_AI_Minion soldier;
         private void Game_OnUpdate(EventArgs args)
         {
-            var insecPoint = Game.CursorPos;
+            var insecPoint = new Vector3(0, 2, 3);
+            if (Clickposition == new Vector3(0, 0, 0))
+                insecPoint = Game.CursorPos;
+            else
+                insecPoint = Clickposition;
+     
             if (!azir.Menu.GetMenu.Item("inseckey").GetValue<KeyBind>().Active)
             {
                 soldier = null;
@@ -62,17 +88,23 @@ namespace Azir_Free_elo_Machine
             var target = TargetSelector.GetSelectedTarget();
             if (!target.IsValidTarget() || target.IsZombie)
                 return;
-            if (azir.Hero.Distance(target) <= azir.Spells.R.Range&&!azir.Hero.IsDashing())
+            if (azir.Hero.Distance(target) <=    azir.Spells.R.Range&&!azir.Hero.IsDashing())
             {
-
-                var tower = ObjectManager.Get<Obj_AI_Turret>().FirstOrDefault(it => it.IsAlly && it.IsValidTarget(1000));
-
-                if (tower != null)
+                if (Clickposition == new Vector3(0, 0, 0))
                 {
-                    if (azir.Spells.R.Cast(tower.ServerPosition)) return;
-                }
+                    var tower = ObjectManager.Get<Obj_AI_Turret>().FirstOrDefault(it => it.IsAlly && it.IsValidTarget(1000));
 
-                if (azir.Spells.R.Cast(Game.CursorPos)) return;
+                    if (tower != null)
+                    {
+                        if (azir.Spells.R.Cast(tower.ServerPosition)) return;
+                    }
+
+                    if (azir.Spells.R.Cast(Game.CursorPos)) return;
+                }
+                else
+                {
+                    azir.Spells.R.Cast(Clickposition);
+                }
 
 
 
