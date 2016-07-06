@@ -90,6 +90,7 @@ namespace Azir_Creator_of_Elo
             {
               _jumpMenu.AddItem(new MenuItem("fleekey", "Jump key").SetValue(new KeyBind('Z', KeyBindType.Press)));
               _jumpMenu.AddItem(new MenuItem("inseckey", "Insec key").SetValue(new KeyBind('T', KeyBindType.Press)));
+                _jumpMenu.AddItem(new MenuItem("insecposkey", "Insec to pos key").SetValue(new KeyBind('G', KeyBindType.Press)));
             }
         }
     }

@@ -53,7 +53,7 @@ namespace Azir_Creator_of_Elo
             {
                 if (target.isRunningOfYou())
                 {
-                    var pos = Prediction.GetPrediction(target, 0.6f).UnitPosition;
+                    var pos = Prediction.GetPrediction(target, 0.8f).UnitPosition;
                     if (pos.Distance(HeroManager.Player.ServerPosition) <= azir.Spells.Q.Range)
                         if (useQ)
                             azir.Spells.Q.Cast(pos);
