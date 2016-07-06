@@ -51,7 +51,7 @@ namespace Azir_Free_elo_Machine
             }
             else
             {
-               // Render.Circle.DrawCircle(Clickposition, 100, System.Drawing.Color.GreenYellow);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                Render.Circle.DrawCircle(Clickposition, 100, System.Drawing.Color.GreenYellow);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
             }
 
         }
