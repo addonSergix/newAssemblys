@@ -18,6 +18,7 @@ namespace Azir_Free_elo_Machine
         Azir_Creator_of_Elo.AzirMain azir;
         public  Insec(AzirMain azir)
         {
+            Clickposition = new Vector3(0, 0, 0);
             this.azir = azir;
             Game.OnUpdate += Game_OnUpdate;
             Game.OnWndProc += Game_OnWndProc;
@@ -44,29 +45,31 @@ namespace Azir_Free_elo_Machine
                     if (target.IsVisible && target.IsValid)
                     {
                         var pos = target.ServerPosition.Extend(Game.CursorPos, -300);
-                        Render.Circle.DrawCircle(pos, 100, System.Drawing.Color.GreenYellow);
+                   //     Render.Circle.DrawCircle(pos, 100, System.Drawing.Color.GreenYellow);
                     }
                 }
             }
             else
             {
-                Render.Circle.DrawCircle(Clickposition, 100, System.Drawing.Color.GreenYellow);
+               // Render.Circle.DrawCircle(Clickposition, 100, System.Drawing.Color.GreenYellow);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
             }
 
         }
         Vector3 Clickposition;
         private void Game_OnWndProc(WndEventArgs args)
         {
-     
-       /*     if (args.Msg == (uint)WindowsMessages.KEY)
+         /*   if (args.Msg != (uint)WindowsMessages.WM_LBUTTONDOWN)
             {
-                if (Clickposition == new Vector3(0,0,0))
-                    Clickposition = Game.CursorPos;
-                else
-                    Clickposition = new Vector3(0,0,0);
-            }*/
+                return;
+            }*/   
+   
+                   //  if (Clickposition == new Vector3(0,0,0))
+                   //      Clickposition = Game.CursorPos;
+                   //  else
+                         Clickposition = new Vector3(0,0,0);
+                 
 
-    }
+        }
         Obj_AI_Minion soldier;
         private void Game_OnUpdate(EventArgs args)
         {

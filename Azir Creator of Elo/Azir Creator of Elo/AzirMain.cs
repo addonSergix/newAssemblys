@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Azir_Creator_of_Elo
 {
-    class AzirMain
+    internal class AzirMain
     {
         public Azir_Free_elo_Machine.AzirWalker walker;
         private Spells _spells;
@@ -29,7 +29,7 @@ namespace Azir_Creator_of_Elo
         public AzirMain()
         {
 
-            tittle = "[Ryze]Ryze Updated June 2016";
+            tittle = "[Azir]Azir Updated June 2016";
             version = "1.0.0.0";
             CustomEvents.Game.OnGameLoad += OnLoad;
         }
