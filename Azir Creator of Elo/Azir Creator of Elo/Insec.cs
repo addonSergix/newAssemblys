@@ -27,11 +27,7 @@ namespace Azir_Free_elo_Machine
 
         private void Drawing_OnDraw(EventArgs args)
         {
-            if (!azir.Menu.GetMenu.Item("inseckey").GetValue<KeyBind>().Active)
-            {
-
-                return;
-            }
+       
             var target = TargetSelector.GetSelectedTarget();
             /*     var posWs = GeoAndExten.GetWsPosition(target.Position.To2D()).Where(x => x != null);
                  foreach (var posW in posWs)
