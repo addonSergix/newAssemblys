@@ -55,16 +55,28 @@ namespace Azir_Free_elo_Machine
 
         private void Game_OnWndProc(WndEventArgs args)
         {
-           if (args.Msg != (uint)WindowsMessages.WM_KEYDOWN)
+
+         
+           
+            
+            if (args.Msg != (uint)WindowsMessages.WM_KEYDOWN)
             {
                 return;
             }
-            var pressed = azir.Menu.GetMenu.Item("insecposkey").GetValue<bool>();
-            if (pressed)
-                     if (Clickposition == new Vector3(0,0,0))
-                         Clickposition = Game.CursorPos;
-                     else
-                         Clickposition = new Vector3(0,0,0);
+            switch (args.WParam)
+            {
+                case 'G':
+                    if (Clickposition == new Vector3(0, 0, 0))
+                        Clickposition = Game.CursorPos;
+                    else
+                        Clickposition = new Vector3(0, 0, 0);
+
+                    break;
+
+           
+            }
+  
+            
                  
 
         }
