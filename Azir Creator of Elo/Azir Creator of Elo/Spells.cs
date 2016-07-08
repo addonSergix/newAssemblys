@@ -50,7 +50,7 @@ namespace Azir_Creator_of_Elo
                 }
                 else
                 {
-                    var predq = Q.GetPrediction(target, true);
+                    var predq = Q.GetPrediction(target);
                     if (predq.Hitchance >= HitChance.High)
                     {
                         Q.Cast(predq.CastPosition);

@@ -40,8 +40,8 @@ namespace Azir_Free_elo_Machine
                 {
                     if (target.IsVisible && target.IsValid)
                     {
-                        var pos = target.ServerPosition.Extend(Game.CursorPos, -300);
-                   //     Render.Circle.DrawCircle(pos, 100, System.Drawing.Color.GreenYellow);
+                        var pos = target.ServerPosition.Extend(Game.CursorPos, -200);
+                        Render.Circle.DrawCircle(pos, 100, System.Drawing.Color.GreenYellow);
                     }
                 }
             }
@@ -123,8 +123,8 @@ namespace Azir_Free_elo_Machine
 
             }
 
-            var pos = target.ServerPosition.Extend(Game.CursorPos, -300);
-            if (pos.Distance(azir.Hero.ServerPosition) <= 1100)
+            var pos = target.ServerPosition.Extend(Game.CursorPos, -200);
+            if (pos.Distance(azir.Hero.ServerPosition) <= 900)
             {
 
                 if (soldier == null)

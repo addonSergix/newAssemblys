@@ -182,12 +182,6 @@ namespace Azir_Creator_of_Elo
 
                 azir.Spells.castQ(azir, target, useQ, nSoldiersToQ);
             }
-
-
-
-            //R
-
-
             if (azir.Menu.GetMenu.Item("CR").GetValue<bool>())
             {
                 if (target.Health < azir.Spells.R.GetDamage(target))
