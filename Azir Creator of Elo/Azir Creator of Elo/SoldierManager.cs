@@ -46,6 +46,27 @@ namespace Azir_Creator_of_Elo
             return null;
         }
 
+        public int SoldiersAttackingn(AzirMain azir)
+        {
+            var soldiersa=0;
+            foreach (Obj_AI_Minion m in azir.soldierManager.Soldiers)
+            {
+                if(!m.IsDead)
+                foreach (Obj_AI_Hero h in HeroManager.Enemies)
+                {
+                    if (m.Distance(h) < 315)
+                    {
+         
+                    }
+                    else
+                    {
+                        soldiersa++;
+                        break;
+                    }
+                }
+            }
+            return soldiersa;
+        }
         private void Obj_AI_Minion_OnPlayAnimation(Obj_AI_Base sender, GameObjectPlayAnimationEventArgs args)
         {
             if (sender is Obj_AI_Minion && IsSoldier((Obj_AI_Minion)sender))
@@ -79,19 +100,20 @@ namespace Azir_Creator_of_Elo
      
         public bool SoldiersAttacking(AzirMain azir)
         {
-            foreach (Obj_AI_Minion m in azir.soldierManager.ActiveSoldiers)
+            foreach (Obj_AI_Minion m in azir.soldierManager.Soldiers)
             {
+               
                 foreach (Obj_AI_Hero h in HeroManager.Enemies)
                 {
-                    if (m.Distance(h) > 250)
+                    if (m.Distance(h) < 315)
                     {
           
-                        return false;
+                        return true;
                     }
                 }
             }
 
-            return true;
+            return false;
         }
 
         }

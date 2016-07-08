@@ -37,27 +37,29 @@ namespace Azir_Creator_of_Elo
      
         public void castQ(AzirMain azir, Obj_AI_Hero target, bool useQ, int nSoldiersToQ)
         {
-            if (target.isRunningOfYou())
-            {
-                if (azir.Spells.Q.IsKillable(target))
-                {
-                    var pred = azir.Spells.Q.GetPrediction(target);
-                    if (pred.Hitchance >= HitChance.High)
-                    {
-                        if (useQ)
-                            azir.Spells.Q.Cast(pred.CastPosition.Extend(target.ServerPosition,100));
-                    }
-                }
-            }
-            if (!azir.soldierManager.SoldiersAttacking(azir) && azir.soldierManager.ActiveSoldiers.Count >= nSoldiersToQ)
+            //revisar entero
+            if (target.Distance(HeroManager.Player) <= 650)
             {
                 if (target.isRunningOfYou())
+                {
+                    if (azir.Spells.Q.IsKillable(target))
+                    {
+                        var pred = azir.Spells.Q.GetPrediction(target);
+                        if (pred.Hitchance >= HitChance.High)
+                        {
+                            if (useQ)
+                                azir.Spells.Q.Cast(pred.CastPosition.Extend(target.ServerPosition, 100));
+                        }
+                    }
+                }
+
+                /* if (target.isRunningOfYou())
                 {
                     var pos = Prediction.GetPrediction(target, 0.8f).UnitPosition;
                     if (pos.Distance(HeroManager.Player.ServerPosition) <= azir.Spells.Q.Range)
                         if (useQ)
                             azir.Spells.Q.Cast(pos);
-                }
+                }*/
                 else
                 {
                     var pred = azir.Spells.Q.GetPrediction(target);
@@ -69,7 +71,11 @@ namespace Azir_Creator_of_Elo
                 }
 
             }
-
+            else
+            {
+               // if(target.d)
+                Q.Cast(target.Position);
+            }
         }
     }
 }

@@ -75,15 +75,20 @@ namespace Azir_Creator_of_Elo
 
             var drawLane = Menu.GetMenu.Item("dsl").GetValue<bool>();
             if (drawLane)
-                foreach (Obj_AI_Minion m in soldierManager.ActiveSoldiers)
+                foreach (Obj_AI_Minion m in soldierManager.Soldiers)
                 {
-                    //     Drawing.DrawCircle(m.Position, 325, System.Drawing.Color.GreenYellow);
-                    var wts = Drawing.WorldToScreen(m.Position);
-                    var wtssxt = Drawing.WorldToScreen(HeroManager.Player.ServerPosition);
-                    if (m.Distance(HeroManager.Player) < 950)
-                        Drawing.DrawLine(wts[0], wts[1], wtssxt[0], wtssxt[1], 5f, System.Drawing.Color.GreenYellow);
-                    else
-                        Drawing.DrawLine(wts[0], wts[1], wtssxt[0], wtssxt[1], 5f, System.Drawing.Color.PaleVioletRed);
+                    if (!m.IsDead)
+                    {
+                        Render.Circle.DrawCircle(m.Position, 315, System.Drawing.Color.GreenYellow);
+                        var wts = Drawing.WorldToScreen(m.Position);
+                        var wtssxt = Drawing.WorldToScreen(HeroManager.Player.ServerPosition);
+
+                        if (m.Distance(HeroManager.Player) < 950)
+                            Drawing.DrawLine(wts[0], wts[1], wtssxt[0], wtssxt[1], 5f, System.Drawing.Color.GreenYellow);
+                        else
+                            Drawing.DrawLine(wts[0], wts[1], wtssxt[0], wtssxt[1], 5f,
+                                System.Drawing.Color.PaleVioletRed);
+                    }
                 }
             if(drawFleeMaxRange)
             {

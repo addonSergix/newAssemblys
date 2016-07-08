@@ -82,11 +82,12 @@ namespace Azir_Creator_of_Elo
                 }
                 else
                 {
-                    if (azir.Spells.Q.Level > 0 && azir.Spells.Q.IsReady())
-                        if((!savew &&(savew&& (wCount > 0))))
+                //    if (azir.Spells.Q.Level > 0 && azir.Spells.Q.IsReady())
+                  //      if((!savew &&(savew&& (wCount > 0))))
                         if (useW)
                             azir.Spells.W.Cast(azir.Hero.Position.Extend(target.ServerPosition, 450));
                 }
+                if(azir.soldierManager.SoldiersAttackingn(azir)<=nSoldiersToQ)
                 azir.Spells.castQ(azir, target, useQ, nSoldiersToQ);
              
             }
@@ -148,48 +149,59 @@ namespace Azir_Creator_of_Elo
             var nSoldiersToQ = azir.Menu.GetMenu.Item("SoldiersToQ").GetValue<Slider>().Value;
             base.Combo(azir);
             var target  = TargetSelector.GetTarget(900, TargetSelector.DamageType.Magical);
-            if (target != null)
-            { 
-                if (target.Distance(azir.Hero.ServerPosition) < 450)
+            if (target == null) return;
+
+            if (target.Distance(azir.Hero.ServerPosition) < 450)
+            {
+                if (target.isRunningOfYou())
                 {
-                    if (target.isRunningOfYou())
-                    {
-                        var pos = Prediction.GetPrediction(target, 0.8f).UnitPosition;
-                        azir.Spells.W.Cast(pos);
-                    }
-                    else
-                    {
-                        var pred = azir.Spells.W.GetPrediction(target);
-                        if (pred.Hitchance >= HitChance.Medium)
-                        {
-                            if (useW)
-                                azir.Spells.W.Cast(pred.CastPosition);
-                        }
-                    }
+                    var pos = Prediction.GetPrediction(target, 0.5f).UnitPosition;
+                    azir.Spells.W.Cast(pos);
                 }
                 else
                 {
-                    if(azir.Spells.Q.Level>0&& azir.Spells.Q.IsReady())
-                        if(useW)
-                    azir.Spells.W.Cast(azir.Hero.Position.Extend(target.ServerPosition, 450));
-                }
-                azir.Spells.castQ(azir,target,useQ,nSoldiersToQ);
-                if (azir.Menu.GetMenu.Item("CR").GetValue<bool>())
-                {
-                    if (target.Health < azir.Spells.R.GetDamage(target))
+                    var pred = azir.Spells.W.GetPrediction(target);
+                    if (pred.Hitchance >= HitChance.Medium)
                     {
-                        var pred = azir.Spells.R.GetPrediction(target);
-                        if (pred.Hitchance >= HitChance.High)
-                        {
-
-                                azir.Spells.R.Cast(pred.CastPosition);
-                        }
+                        if (useW)
+                            azir.Spells.W.Cast(pred.CastPosition);
                     }
-                    azir.Spells.R.Cast(target);
-
                 }
             }
-   
+            else
+            {
+                if(azir.Spells.Q.Level>0&& azir.Spells.Q.IsReady())
+                    if(useW)
+                        if(target.Distance(HeroManager.Player)<=750)
+                            azir.Spells.W.Cast(azir.Hero.Position.Extend(target.ServerPosition, 450));
+            }
+            //Q
+            if (azir.soldierManager.SoldiersAttackingn(azir) >= nSoldiersToQ)
+            {
+
+
+                azir.Spells.castQ(azir, target, useQ, nSoldiersToQ);
+            }
+
+
+
+            //R
+
+
+            if (azir.Menu.GetMenu.Item("CR").GetValue<bool>())
+            {
+                if (target.Health < azir.Spells.R.GetDamage(target))
+                {
+                    var pred = azir.Spells.R.GetPrediction(target);
+                    if (pred.Hitchance >= HitChance.High)
+                    {
+
+                        azir.Spells.R.Cast(pred.CastPosition);
+                    }
+                }
+                azir.Spells.R.Cast(target);
+
+            }
         }
     }
 }
