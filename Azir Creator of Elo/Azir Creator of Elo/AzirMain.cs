@@ -74,12 +74,31 @@ namespace Azir_Creator_of_Elo
 
 
             var drawLane = Menu.GetMenu.Item("dsl").GetValue<bool>();
+            int x = 0;
             if (drawLane)
+
                 foreach (Obj_AI_Minion m in soldierManager.Soldiers)
                 {
+                    //m.tim
                     if (!m.IsDead)
                     {
-                        Render.Circle.DrawCircle(m.Position, 315, System.Drawing.Color.GreenYellow);
+                        foreach (Obj_AI_Hero h in HeroManager.Enemies)
+                        {
+                            if (m.Distance(h) < 335)
+                            {
+                                x++;
+                     
+                            }
+                        
+                        }
+                        if (x > 0)
+                        {
+                            Render.Circle.DrawCircle(m.Position, 315, System.Drawing.Color.GreenYellow);
+                        }
+                        else
+                        {
+                            Render.Circle.DrawCircle(m.Position, 315, System.Drawing.Color.PaleVioletRed);
+                        }
                         var wts = Drawing.WorldToScreen(m.Position);
                         var wtssxt = Drawing.WorldToScreen(HeroManager.Player.ServerPosition);
 

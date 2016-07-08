@@ -32,49 +32,30 @@ namespace Azir_Creator_of_Elo
             //  ignite = ObjectManager.Player.GetSpellSlot("SummonerDot");
         }
 
-    
 
-     
+
+
         public void castQ(AzirMain azir, Obj_AI_Hero target, bool useQ, int nSoldiersToQ)
         {
             //revisar entero
-            if (target.Distance(HeroManager.Player) <= 650)
+            if (target.Distance(HeroManager.Player) <= azir.Spells.Q.Range)
             {
                 if (target.isRunningOfYou())
                 {
-                    if (azir.Spells.Q.IsKillable(target))
+                    var predpos = Prediction.GetPrediction(target, 0.5f);
+                    if (azir.Hero.Distance(predpos.CastPosition) <= azir.Spells.Q.Range)
                     {
-                        var pred = azir.Spells.Q.GetPrediction(target);
-                        if (pred.Hitchance >= HitChance.High)
-                        {
-                            if (useQ)
-                                azir.Spells.Q.Cast(pred.CastPosition.Extend(target.ServerPosition, 100));
-                        }
+                        azir.Spells.Q.Cast((predpos.CastPosition));
                     }
                 }
-
-                /* if (target.isRunningOfYou())
-                {
-                    var pos = Prediction.GetPrediction(target, 0.8f).UnitPosition;
-                    if (pos.Distance(HeroManager.Player.ServerPosition) <= azir.Spells.Q.Range)
-                        if (useQ)
-                            azir.Spells.Q.Cast(pos);
-                }*/
                 else
                 {
-                    var pred = azir.Spells.Q.GetPrediction(target);
-                    if (pred.Hitchance >= HitChance.High)
+                    var predq = Q.GetPrediction(target, true);
+                    if (predq.Hitchance >= HitChance.High)
                     {
-                        if (useQ)
-                            azir.Spells.Q.Cast(pred.CastPosition);
+                        Q.Cast(predq.CastPosition);
                     }
                 }
-
-            }
-            else
-            {
-               // if(target.d)
-                Q.Cast(target.Position);
             }
         }
     }
