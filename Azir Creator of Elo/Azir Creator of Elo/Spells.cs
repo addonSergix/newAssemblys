@@ -42,7 +42,7 @@ namespace Azir_Creator_of_Elo
             {
                 if (target.isRunningOfYou())
                 {
-                    var predpos = Prediction.GetPrediction(target, 0.5f);
+                    var predpos = Prediction.GetPrediction(target, 500f);
                     if (azir.Hero.Distance(predpos.CastPosition) <= azir.Spells.Q.Range)
                     {
                         azir.Spells.Q.Cast((predpos.CastPosition));
