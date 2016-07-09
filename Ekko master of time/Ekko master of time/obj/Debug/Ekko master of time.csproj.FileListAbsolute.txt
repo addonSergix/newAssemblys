@@ -1,0 +1,15 @@
+C:\Users\sergi\Documents\Visual Studio 2015\Projects\Ekko master of time\Ekko master of time\bin\Debug\Ekko master of time.exe.config
+C:\Users\sergi\Documents\Visual Studio 2015\Projects\Ekko master of time\Ekko master of time\bin\Debug\Ekko master of time.exe
+C:\Users\sergi\Documents\Visual Studio 2015\Projects\Ekko master of time\Ekko master of time\bin\Debug\Ekko master of time.pdb
+C:\Users\sergi\Documents\Visual Studio 2015\Projects\Ekko master of time\Ekko master of time\bin\Debug\AwesomePrediction.dll
+C:\Users\sergi\Documents\Visual Studio 2015\Projects\Ekko master of time\Ekko master of time\bin\Debug\LeagueSharp.Common.dll
+C:\Users\sergi\Documents\Visual Studio 2015\Projects\Ekko master of time\Ekko master of time\bin\Debug\LeagueSharp.dll
+C:\Users\sergi\Documents\Visual Studio 2015\Projects\Ekko master of time\Ekko master of time\bin\Debug\SharpDX.dll
+C:\Users\sergi\Documents\Visual Studio 2015\Projects\Ekko master of time\Ekko master of time\bin\Debug\SharpDX.Direct3D9.dll
+C:\Users\sergi\Documents\Visual Studio 2015\Projects\Ekko master of time\Ekko master of time\bin\Debug\LeagueSharp.Data.dll
+C:\Users\sergi\Documents\Visual Studio 2015\Projects\Ekko master of time\Ekko master of time\bin\Debug\clipper_library.dll
+C:\Users\sergi\Documents\Visual Studio 2015\Projects\Ekko master of time\Ekko master of time\bin\Debug\LeagueSharp.Sandbox.dll
+C:\Users\sergi\Documents\Visual Studio 2015\Projects\Ekko master of time\Ekko master of time\bin\Debug\Newtonsoft.Json.dll
+C:\Users\sergi\Documents\Visual Studio 2015\Projects\Ekko master of time\Ekko master of time\obj\Debug\Ekko master of time.csprojResolveAssemblyReference.cache
+C:\Users\sergi\Documents\Visual Studio 2015\Projects\Ekko master of time\Ekko master of time\obj\Debug\Ekko master of time.exe
+C:\Users\sergi\Documents\Visual Studio 2015\Projects\Ekko master of time\Ekko master of time\obj\Debug\Ekko master of time.pdb

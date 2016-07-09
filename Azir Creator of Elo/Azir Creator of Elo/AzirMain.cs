@@ -43,7 +43,7 @@ namespace Azir_Creator_of_Elo
         private void OnLoad(EventArgs args)
         {
             if (Hero.ChampionName != "Azir") return;
-            Game.PrintChat("<b><font color =\"#FF33D6\">Azir creator of Elo Loaded!");
+            Game.PrintChat("<b><font color =\"#FF33D6\">Azir creator of Elo Loaded!</b>");
             _menu = new AzirMenu("Azir Creator of Elo");
             soldierManager = new SoldierManager();
             _spells = new Spells();
@@ -109,7 +109,8 @@ namespace Azir_Creator_of_Elo
                                 System.Drawing.Color.PaleVioletRed);
                     }
                 }
-            if(drawFleeMaxRange)
+     
+            if (drawFleeMaxRange)
             {
                 // var pos = HeroManager.Player.Position.Extend(Game.CursorPos, 450);
 
