@@ -15,7 +15,7 @@ namespace Azir_Creator_of_Elo
         public Azir_Free_elo_Machine.AzirWalker walker;
         private Spells _spells;
         public Menu _menu;
-        public Modes _modes;
+        public AzirModes _modes;
         private string tittle, version;
         public Azir_Creator_of_Elo.Spells Spells
         {

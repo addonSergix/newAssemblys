@@ -54,6 +54,7 @@ namespace Azir_Creator_of_Elo
                 if(!m.IsDead)
                 foreach (Obj_AI_Hero h in HeroManager.Enemies)
                 {
+                        if(!h.IsDead)
                     if (m.Distance(h) >315)
                     {
                             soldiersa++;

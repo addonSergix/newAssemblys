@@ -28,7 +28,7 @@ namespace Azir_Free_elo_Machine
         Azir_Creator_of_Elo.AzirMain azir;
         public  Insec(AzirMain azir)
         {
-            steps = Steps.w;
+            steps = Steps.firstCalcs;
             Clickposition = new Vector3(0, 0, 0);
             this.azir = azir;
             Game.OnUpdate += Game_OnUpdate;
@@ -58,6 +58,8 @@ namespace Azir_Free_elo_Machine
             }
             else
             {
+                var pos = target.ServerPosition.Extend(Clickposition, -200);
+                Render.Circle.DrawCircle(pos, 100, System.Drawing.Color.GreenYellow);
                 Render.Circle.DrawCircle(Clickposition, 100, System.Drawing.Color.GreenYellow);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
             }
 
@@ -94,6 +96,9 @@ namespace Azir_Free_elo_Machine
         Obj_AI_Minion soldier;
         private void Game_OnUpdate(EventArgs args)
         {
+ 
+            
+            if (!azir.Spells.R.IsReady()) return;
             var insecPoint = new Vector3(0, 2, 3);
             if (Clickposition == new Vector3(0, 0, 0))
                 insecPoint = Game.CursorPos;
@@ -111,14 +116,28 @@ namespace Azir_Free_elo_Machine
                 return;
             var target = TargetSelector.GetSelectedTarget();
             if (!target.IsValidTarget() || target.IsZombie)
-                return;
+            {
 
+                steps = Steps.firstCalcs;
+                return;
+            }
+            var insecPos = new Vector3(0, 0, 0);
+            if (Clickposition == new Vector3(0, 0, 0))
+            {
+
+                insecPos = target.ServerPosition.Extend(Game.CursorPos, -200);
+            }
+            else
+            {
+                insecPos = target.ServerPosition.Extend(insecPoint, -200);
+            }
             switch (steps)
             {
                 case Steps.firstCalcs:
                     if (insecPoint.Distance(HeroManager.Player.ServerPosition)>azir.Spells.Q.Range)
                     {
                        azir._modes.jump.fleeTopos(insecPoint);
+                        steps = steps = Steps.R;
                     }
                     break;
                 case Steps.w:
@@ -128,6 +147,11 @@ namespace Azir_Free_elo_Machine
                 case Steps.q:
                     break;
                 case Steps.R:
+                    if (HeroManager.Player.Distance(target)<=200)
+                    {
+                        azir.Spells.R.Cast(Game.CursorPos);
+                        steps = Steps.firstCalcs;
+                    }
                     break;
             }
   
