@@ -61,6 +61,7 @@
     <Compile Include="Extensions.cs" />
     <Compile Include="Insec.cs" />
     <Compile Include="Jump.cs" />
+    <Compile Include="Math\Geometry.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="Modes.cs" />
     <Compile Include="Program.cs" />

@@ -56,12 +56,13 @@ namespace Azir_Creator_of_Elo
                 {
                     if (m.Distance(h) < 315)
                     {
-         
-                    }
+                            soldiersa++;
+                            break;
+                        }
                     else
                     {
-                        soldiersa++;
-                        break;
+
+                      
                     }
                 }
             }

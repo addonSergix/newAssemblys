@@ -162,8 +162,8 @@ namespace Azir_Free_elo_Machine
         }
         public  Vector2 RotatePoint( Vector2 pointToRotate, Vector2 centerPoint, float angleInRadians)
         {
-            double cosTheta = Math.Cos(angleInRadians);
-            double sinTheta = Math.Sin(angleInRadians);
+            double cosTheta = System.Math.Cos(angleInRadians);
+            double sinTheta = System.Math.Sin(angleInRadians);
             return new Vector2
             {
                 X =

@@ -43,6 +43,7 @@ namespace Azir_Creator_of_Elo
         private void OnLoad(EventArgs args)
         {
             if (Hero.ChampionName != "Azir") return;
+   
             Game.PrintChat("<b><font color =\"#FF33D6\">Azir creator of Elo Loaded!</font></b>");
             _menu = new AzirMenu("Azir Creator of Elo");
             soldierManager = new SoldierManager();

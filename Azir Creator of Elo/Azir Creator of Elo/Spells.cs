@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Azir_Free_elo_Machine.Math;
 using LeagueSharp;
 using LeagueSharp.Common;
 using SharpDX;
@@ -37,25 +38,24 @@ namespace Azir_Creator_of_Elo
 
         public void castQ(AzirMain azir, Obj_AI_Hero target, bool useQ, int nSoldiersToQ)
         {
-            //revisar entero
-            if (target.Distance(HeroManager.Player) <= azir.Spells.Q.Range)
+           var points= Azir_Free_elo_Machine.Math.Geometry.PointsAroundTheTarget(target.ServerPosition, 320);
+            List< Azir_Free_elo_Machine.Math.Points> pointsAttack = new List<Points>();
+            foreach (Vector3 point in points)
             {
-                if (target.isRunningOfYou())
+                if (point.Distance(azir.Hero.ServerPosition) <= azir.Spells.Q.Range)
                 {
-                    var predpos = Prediction.GetPrediction(target, 500f);
-                    if (azir.Hero.Distance(predpos.CastPosition) <= azir.Spells.Q.Range)
-                    {
-                        azir.Spells.Q.Cast((predpos.CastPosition));
-                    }
+                 
+                    
+                   pointsAttack.Add(new Points(Azir_Free_elo_Machine.Math.Geometry.Nattacks(azir,point,target),point));
+                 //    var spaceAzirQ =azir.Spells.Q.Speed*time;
+                  //  var spacetargetpos = Prediction.GetPrediction(target, time);
+
                 }
-                else
-                {
-                    var predq = Q.GetPrediction(target);
-                    if (predq.Hitchance >= HitChance.High)
-                    {
-                        Q.Cast(predq.CastPosition);
-                    }
-                }
+            }
+            if (pointsAttack.MaxOrDefault(x => x.hits).hits > 0)
+            {
+            //    Game.PrintChat("Attacks : "+ pointsAttack.MaxOrDefault(x => x.hits).hits);
+                Q.Cast(pointsAttack.MaxOrDefault(x => x.hits).point);
             }
         }
     }
