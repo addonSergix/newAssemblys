@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace Azir_Creator_of_Elo
 {
-    internal class AzirMain
+   internal class AzirMain
     {
-        public Azir_Free_elo_Machine.AzirWalker walker;
+        public AzirWalker walker;
         private Spells _spells;
         public Menu _menu;
         public AzirModes _modes;

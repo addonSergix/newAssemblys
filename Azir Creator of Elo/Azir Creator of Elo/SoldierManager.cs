@@ -12,6 +12,9 @@ namespace Azir_Creator_of_Elo
 {
     class SoldierManager
     {
+ 
+
+      
         private static Dictionary<int, string> Animations = new Dictionary<int, string>();
         private static List<Obj_AI_Minion> _soldiers = new List<Obj_AI_Minion>();
         public List<Obj_AI_Minion> Soldiers {
@@ -48,22 +51,9 @@ namespace Azir_Creator_of_Elo
 
         public int SoldiersAttackingn(AzirMain azir)
         {
-            var soldiersa=0;
-            foreach (Obj_AI_Minion m in azir.soldierManager.Soldiers)
-            {
-                if(!m.IsDead)
-                foreach (Obj_AI_Hero h in HeroManager.Enemies)
-                {
-                        if(!h.IsDead)
-                    if (m.Distance(h) >315)
-                    {
-                            soldiersa++;
-                            break;
-                        }
-              
-                }
-            }
-            return soldiersa;
+            var soldiersa= azir.soldierManager.Soldiers.Where(m => !m.IsDead).Count(m => HeroManager.Enemies.Where(h => !h.IsDead).Any(h => m.Distance(h) <= 315));
+            return (int)(azir.soldierManager.Soldiers.Count - soldiersa);
+
         }
         private void Obj_AI_Minion_OnPlayAnimation(Obj_AI_Base sender, GameObjectPlayAnimationEventArgs args)
         {

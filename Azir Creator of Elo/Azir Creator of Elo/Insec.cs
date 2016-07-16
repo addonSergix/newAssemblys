@@ -51,14 +51,14 @@ namespace Azir_Free_elo_Machine
                 {
                     if (target.IsVisible && target.IsValid)
                     {
-                        var pos = target.ServerPosition.Extend(Game.CursorPos, -200);
+                        var pos = target.ServerPosition.Extend(Game.CursorPos, -300);
                         Render.Circle.DrawCircle(pos, 100, System.Drawing.Color.GreenYellow);
                     }
                 }
             }
             else
             {
-                var pos = target.ServerPosition.Extend(Clickposition, -200);
+                var pos = target.ServerPosition.Extend(Clickposition, -300);
                 Render.Circle.DrawCircle(pos, 100, System.Drawing.Color.GreenYellow);
                 Render.Circle.DrawCircle(Clickposition, 100, System.Drawing.Color.GreenYellow);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
             }
@@ -125,11 +125,11 @@ namespace Azir_Free_elo_Machine
             if (Clickposition == new Vector3(0, 0, 0))
             {
 
-                insecPos = target.ServerPosition.Extend(Game.CursorPos, -200);
+                insecPos = target.ServerPosition.Extend(Game.CursorPos, -300);
             }
             else
             {
-                insecPos = target.ServerPosition.Extend(insecPoint, -200);
+                insecPos = target.ServerPosition.Extend(insecPoint, -300);
             }
             switch (steps)
             {
@@ -147,10 +147,17 @@ namespace Azir_Free_elo_Machine
                 case Steps.q:
                     break;
                 case Steps.R:
-                    if (HeroManager.Player.Distance(target)<=200)
+                    Vector2 start1 = HeroManager.Player.Position.To2D().Extend(insecPos.To2D(), -300);
+                    Vector2 end1 = start1.Extend(HeroManager.Player.Position.To2D(), 750);
+                    float width1 = HeroManager.Player.Level == 3 ? 125 * 6 / 2 :
+                               HeroManager.Player.Level == 2 ? 125 * 5 / 2 :
+                               125 * 4 / 2;
+                    var Rect1 = new Geometry.Polygon.Rectangle(start1, end1, width1 - 100);
+                    var Predicted1 = Prediction.GetPrediction(target, Game.Ping / 1000f + 0.25f).UnitPosition;
+                    if (Rect1.IsInside(target.Position) && Rect1.IsInside(Predicted1))
                     {
-                        azir.Spells.R.Cast(Game.CursorPos);
-                        steps = Steps.firstCalcs;
+                       azir.Spells.R.Cast(insecPoint);
+                        return;
                     }
                     break;
             }
