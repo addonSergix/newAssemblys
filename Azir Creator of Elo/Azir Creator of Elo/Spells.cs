@@ -58,22 +58,28 @@ namespace Azir_Creator_of_Elo
 
 
      internal class StaticSpells
-    {
+     {
+         private static Points _pointer;
         public static void CastQ(AzirMain azir, Obj_AI_Hero target, bool useQ, int nSoldiersToQ)
         {
-
+           var pointsAttack=new Points[120];
             var points = Azir_Free_elo_Machine.Math.Geometry.PointsAroundTheTarget(target.ServerPosition, 640, 80);
-            var pointsAttack = new List<Points>();
+            var i = 0;
+           
             foreach (var point in points)
             {
-                if (point.Distance(azir.Hero.ServerPosition) <= azir.Spells.Q.Range)
-                {
+               
+                    if (point.Distance(azir.Hero.ServerPosition) <= azir.Spells.Q.Range)
+                    {
+                        _pointer.hits = Azir_Free_elo_Machine.Math.Geometry.Nattacks(azir, point, target);
+                        _pointer.point = point;
+                        pointsAttack[i] = _pointer;
 
 
-                    pointsAttack.Add(new Points(Azir_Free_elo_Machine.Math.Geometry.Nattacks(azir, point, target), point));
+                    }
+                    i++;
+        
 
-
-                }
             }
             if (pointsAttack.MaxOrDefault(x => x.hits).hits > 0)
             {

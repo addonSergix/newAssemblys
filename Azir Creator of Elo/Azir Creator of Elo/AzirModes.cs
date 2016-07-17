@@ -76,16 +76,24 @@ namespace Azir_Creator_of_Elo
                         else
                         {
                             if (useW)
+                                if(azir.Spells.W.IsReady())
                                 azir.Spells.W.Cast(pred.CastPosition);
                         }
                     }
                 }
                 else
                 {
-                //    if (azir.Spells.Q.Level > 0 && azir.Spells.Q.IsReady())
-                  //      if((!savew &&(savew&& (wCount > 0))))
+                    //    if (azir.Spells.Q.Level > 0 && azir.Spells.Q.IsReady())
+                    //      if((!savew &&(savew&& (wCount > 0))))
+                    if (savew && (wCount == 1))
+                    {
+
+                    }
+                    else
+                    {
                         if (useW)
                             azir.Spells.W.Cast(azir.Hero.Position.Extend(target.ServerPosition, 450));
+                    }
                 }
                 if(azir.soldierManager.SoldiersAttackingn(azir)<=nSoldiersToQ)
                 StaticSpells.CastQ(azir, target, useQ, nSoldiersToQ);
@@ -177,11 +185,10 @@ namespace Azir_Creator_of_Elo
             }
             //Q
 
-            if (azir.Spells.Q.IsReady()&&azir.soldierManager.Soldiers.Count>0&&azir.soldierManager.SoldiersAttackingn(azir) <= nSoldiersToQ)
+            if (azir.Spells.Q.IsReady()&&azir.soldierManager.Soldiers.Count>0&&azir.soldierManager.SoldiersAttackingn(azir) >= nSoldiersToQ)
             {
-              Game.PrintChat("Soldados no atacando = "  + azir.soldierManager.SoldiersAttackingn(azir) + "   soldados totales = " + azir.soldierManager.Soldiers.Count(x => !x.IsDead));
-                //                Game.PrintChat("cast w parados : " + azir.soldierManager.SoldiersAttackingn(azir));
-               StaticSpells.CastQ(azir, target, useQ, nSoldiersToQ);
+
+              StaticSpells.CastQ(azir, target, useQ, nSoldiersToQ);
             }
             if (azir.Spells.Q.IsKillable(target)&&useQ)
             {
@@ -190,8 +197,8 @@ namespace Azir_Creator_of_Elo
                     var pred = azir.Spells.Q.GetPrediction(target);
                     if (pred.Hitchance >= HitChance.High)
                     {
-                        Game.PrintChat("Killeable with q");
-//                        azir.Spells.Q.Cast(pred.CastPosition);
+                 //       Game.PrintChat("Killeable with q");
+                        azir.Spells.Q.Cast(pred.CastPosition);
                     }
                 }
             }

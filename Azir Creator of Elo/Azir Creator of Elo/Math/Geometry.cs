@@ -24,6 +24,7 @@ namespace Azir_Free_elo_Machine.Math
 }
     static class Geometry
     {
+        
         public static IEnumerable<Vector3> PointsAroundTheTarget(Vector3 pos, float dist, float prec = 15, float prec2 = 5)
         {
             if (!pos.IsValid())
@@ -63,21 +64,15 @@ namespace Azir_Free_elo_Machine.Math
             var attacksS=0f;
             foreach (var m in azir.soldierManager.Soldiers)
             {
-                if (!m.IsDead)
-                {
-                    var spaceToDoQ = m.ServerPosition.Distance(point);
-    
-                    var timeToDoIt = (spaceToDoQ/azir.Spells.Q.Speed)*1000;
-                    Game.PrintChat("time to do it : " + timeToDoIt );
-                    var posFinalTarget = Prediction.GetPrediction(target, timeToDoIt);
-                    var space = azirSoldierRange - posFinalTarget.UnitPosition.Distance(point);
+                if (m.IsDead) continue;
+                var spaceToDoQ = m.ServerPosition.Distance(point);
+                var timeToDoIt = (spaceToDoQ/azir.Spells.Q.Speed);
+                var posFinalTarget = Prediction.GetPrediction(target, timeToDoIt);
+                var space = azirSoldierRange - posFinalTarget.UnitPosition.Distance(point);
 
-                    var time = space/target.MoveSpeed;
-                    attacksS +=  (time/azir.Hero.AttackDelay);
-                }
-
+                var time = space/target.MoveSpeed;
+                attacksS +=  (time/azir.Hero.AttackDelay);
             }
-          // Game.PrintChat("Attack : " + attacksS);
             return attacksS;
         }
     }

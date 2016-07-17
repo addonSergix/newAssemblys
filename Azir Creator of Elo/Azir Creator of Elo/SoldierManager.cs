@@ -51,8 +51,9 @@ namespace Azir_Creator_of_Elo
 
         public int SoldiersAttackingn(AzirMain azir)
         {
-            var soldiersa= azir.soldierManager.Soldiers.Where(m => !m.IsDead).Count(m => HeroManager.Enemies.Where(h => !h.IsDead).Any(h => m.Distance(h) <= 315));
-            return (int)(azir.soldierManager.Soldiers.Count - soldiersa);
+            var soldiersa= azir.soldierManager.Soldiers.Where(m => !m.IsDead).Count(m => HeroManager.Enemies.Where(h => !h.IsDead).Any(h => m.Distance(h) > 315));
+        //    Game.PrintChat("soldiersa : " +soldiersa);
+            return (int)(soldiersa);
 
         }
         private void Obj_AI_Minion_OnPlayAnimation(Obj_AI_Base sender, GameObjectPlayAnimationEventArgs args)

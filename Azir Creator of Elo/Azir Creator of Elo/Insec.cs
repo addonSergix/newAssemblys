@@ -96,7 +96,7 @@ namespace Azir_Free_elo_Machine
         Obj_AI_Minion soldier;
         private void Game_OnUpdate(EventArgs args)
         {
- 
+            return;
             
             if (!azir.Spells.R.IsReady()) return;
             var insecPoint = new Vector3(0, 2, 3);
