@@ -185,7 +185,7 @@ namespace Azir_Creator_of_Elo
             }
             //Q
 
-            if (azir.Spells.Q.IsReady()&&azir.soldierManager.Soldiers.Count>0&&azir.soldierManager.SoldiersAttackingn(azir,target) >= nSoldiersToQ)
+            if (!azir.soldierManager.newSloiderSoon(azir) && azir.Spells.Q.IsReady()&&azir.soldierManager.Soldiers.Count>0&&azir.soldierManager.SoldiersAttackingn(azir,target) >= nSoldiersToQ)
             {
 
               StaticSpells.CastQ(azir, target, useQ, nSoldiersToQ);
