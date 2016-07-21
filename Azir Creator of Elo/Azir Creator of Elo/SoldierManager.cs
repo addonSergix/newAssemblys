@@ -51,17 +51,24 @@ namespace Azir_Creator_of_Elo
 
         public int SoldiersAttackingn(AzirMain azir,Obj_AI_Hero target)
         {
-         const int SoldierAttackRange = 315;
-        int i = 0;
+         const int soldierAttackRange = 315;
+          var i = 0;
             foreach (var soldier in azir.soldierManager.Soldiers)
             {
-                if (soldier.Distance(target)<=SoldierAttackRange)
+                if (soldier.Distance(target)<=soldierAttackRange)
                     i += 1;
             }
             return i;
             //       return (int)(soldiersa);
 
         }
+        public  bool newSloiderSoon(AzirMain azir)
+        {
+            //Console.WriteLine("cd:"+(W.Instance.CooldownExpires-Game.Time));
+
+            return (azir.Spells.W.Instance.CooldownExpires - Game.Time) > 0 && (azir.Spells.W.Instance.CooldownExpires - Game.Time) < 0.5f;
+        }
+
         private void Obj_AI_Minion_OnPlayAnimation(Obj_AI_Base sender, GameObjectPlayAnimationEventArgs args)
         {
             if (sender is Obj_AI_Minion && IsSoldier((Obj_AI_Minion)sender))

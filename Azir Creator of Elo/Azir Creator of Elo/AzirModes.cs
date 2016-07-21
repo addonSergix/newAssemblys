@@ -95,7 +95,7 @@ namespace Azir_Creator_of_Elo
                             azir.Spells.W.Cast(azir.Hero.Position.Extend(target.ServerPosition, 450));
                     }
                 }
-                if(azir.soldierManager.SoldiersAttackingn(azir,target)<=nSoldiersToQ)
+                if(!azir.soldierManager.newSloiderSoon(azir)&&azir.soldierManager.SoldiersAttackingn(azir,target)<=nSoldiersToQ)
                 StaticSpells.CastQ(azir, target, useQ, nSoldiersToQ);
              
             }
