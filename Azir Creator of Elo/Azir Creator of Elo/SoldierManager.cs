@@ -49,11 +49,18 @@ namespace Azir_Creator_of_Elo
             return null;
         }
 
-        public int SoldiersAttackingn(AzirMain azir)
+        public int SoldiersAttackingn(AzirMain azir,Obj_AI_Hero target)
         {
-            var soldiersa= azir.soldierManager.Soldiers.Where(m => !m.IsDead).Count(m => HeroManager.Enemies.Where(h => !h.IsDead).Any(h => m.Distance(h) > 315));
-        //    Game.PrintChat("soldiersa : " +soldiersa);
-            return (int)(soldiersa);
+         const int SoldierAttackRange = 315;
+        int i = 0;
+            foreach (var soldier in azir.soldierManager.Soldiers)
+            {
+                if (Vector2.DistanceSquared(target.Position.To2D(), soldier.Position.To2D()) <=
+                    SoldierAttackRange*SoldierAttackRange)
+                    i += 1;
+            }
+            return i;
+            //       return (int)(soldiersa);
 
         }
         private void Obj_AI_Minion_OnPlayAnimation(Obj_AI_Base sender, GameObjectPlayAnimationEventArgs args)

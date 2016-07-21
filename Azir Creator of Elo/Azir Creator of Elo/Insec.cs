@@ -19,10 +19,8 @@ namespace Azir_Free_elo_Machine
         public enum Steps
         {
             firstCalcs=0,
-            w = 1,
-            e = 2,
-            q = 3,
-            R = 4,
+        jump=1,
+            R = 2,
         }
         private Steps steps;
         Azir_Creator_of_Elo.AzirMain azir;
@@ -38,7 +36,7 @@ namespace Azir_Free_elo_Machine
 
         private void Drawing_OnDraw(EventArgs args)
         {
-       
+      
             var target = TargetSelector.GetSelectedTarget();
             /*     var posWs = GeoAndExten.GetWsPosition(target.Position.To2D()).Where(x => x != null);
                  foreach (var posW in posWs)
@@ -96,9 +94,8 @@ namespace Azir_Free_elo_Machine
         Obj_AI_Minion soldier;
         private void Game_OnUpdate(EventArgs args)
         {
-            return;
-            
-            if (!azir.Spells.R.IsReady()) return;
+
+            //   if (!azir.Spells.R.IsReady()) return;
             var insecPoint = new Vector3(0, 2, 3);
             if (Clickposition == new Vector3(0, 0, 0))
                 insecPoint = Game.CursorPos;
@@ -107,58 +104,62 @@ namespace Azir_Free_elo_Machine
      
             if (!azir.Menu.GetMenu.Item("inseckey").GetValue<KeyBind>().Active)
             {
+                steps = Steps.firstCalcs;
                 soldier = null;
                 return;
             }
+
             azir.Orbwalk(Game.CursorPos);
  
             if (!insecPoint.IsValid())
                 return;
             var target = TargetSelector.GetSelectedTarget();
+            if (target == null) return;
             if (!target.IsValidTarget() || target.IsZombie)
             {
 
                 steps = Steps.firstCalcs;
                 return;
             }
+
             var insecPos = new Vector3(0, 0, 0);
             if (Clickposition == new Vector3(0, 0, 0))
             {
 
-                insecPos = target.ServerPosition.Extend(Game.CursorPos, -300);
+                insecPos = Game.CursorPos;
             }
             else
             {
-                insecPos = target.ServerPosition.Extend(insecPoint, -300);
+                insecPos = insecPoint;
             }
+            var postoGo = target.ServerPosition.Extend(insecPos, -300);
             switch (steps)
             {
+        
                 case Steps.firstCalcs:
-                    if (insecPoint.Distance(HeroManager.Player.ServerPosition)>azir.Spells.Q.Range)
+                    if (target.Distance(HeroManager.Player) <= azir.Spells.Q.Range)
                     {
-                       azir._modes.jump.fleeTopos(insecPoint);
-                        steps = steps = Steps.R;
+
+                        steps = Steps.jump;
                     }
                     break;
-                case Steps.w:
-                    break;
-                case Steps.e:
-                    break;
-                case Steps.q:
+                case Steps.jump:
+                    if (HeroManager.Player.ServerPosition.Distance(postoGo) <= 300)
+                    {
+                        steps = Steps.R;
+                    }
+                    else
+                    {
+               
+                        azir._modes.jump.updateLogic(postoGo);
+                    }
                     break;
                 case Steps.R:
-                    Vector2 start1 = HeroManager.Player.Position.To2D().Extend(insecPos.To2D(), -300);
-                    Vector2 end1 = start1.Extend(HeroManager.Player.Position.To2D(), 750);
-                    float width1 = HeroManager.Player.Level == 3 ? 125 * 6 / 2 :
-                               HeroManager.Player.Level == 2 ? 125 * 5 / 2 :
-                               125 * 4 / 2;
-                    var Rect1 = new Geometry.Polygon.Rectangle(start1, end1, width1 - 100);
-                    var Predicted1 = Prediction.GetPrediction(target, Game.Ping / 1000f + 0.25f).UnitPosition;
-                    if (Rect1.IsInside(target.Position) && Rect1.IsInside(Predicted1))
-                    {
-                       azir.Spells.R.Cast(insecPoint);
-                        return;
-                    }
+                        azir.Spells.R.Cast(insecPoint);
+                        steps = Steps.firstCalcs;
+                    
+                   
+                    
                     break;
             }
   
