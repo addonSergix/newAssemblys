@@ -151,7 +151,7 @@ namespace Azir_Free_elo_Machine
                     else
                     {
                
-                        azir._modes.jump.updateLogic(postoGo);
+                        azir._modes._jump.updateLogic(postoGo);
                     }
                     break;
                 case Steps.R:

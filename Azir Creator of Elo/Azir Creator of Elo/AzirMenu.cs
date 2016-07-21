@@ -63,6 +63,8 @@ namespace Azir_Creator_of_Elo
             {
                 _laneClearMenu.AddItem(new MenuItem("LQ", "Use Q").SetValue(true));
                 _laneClearMenu.AddItem(new MenuItem("LW", "Use W").SetValue(true));
+                _laneClearMenu.AddItem(new MenuItem("LWM", "Minions at W range to cast").SetValue(new Slider(3, 1, 6)));
+                _laneClearMenu.AddItem(new MenuItem("LQM", "Soldiers to Q ").SetValue(new Slider(1, 1, 3)));
 
             }
         }

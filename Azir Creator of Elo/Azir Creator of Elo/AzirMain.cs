@@ -10,22 +10,26 @@ using System.Threading.Tasks;
 
 namespace Azir_Creator_of_Elo
 {
-   internal class AzirMain
+    internal class AzirMain
     {
         public AzirWalker walker;
         private Spells _spells;
         public Menu _menu;
         public AzirModes _modes;
         private string tittle, version;
+
         public Azir_Creator_of_Elo.Spells Spells
         {
             get { return _spells; }
         }
+
         public Azir_Creator_of_Elo.Menu Menu
         {
             get { return _menu; }
         }
+
         public SoldierManager soldierManager;
+
         public AzirMain()
         {
 
@@ -33,17 +37,16 @@ namespace Azir_Creator_of_Elo
             version = "1.0.0.0";
             CustomEvents.Game.OnGameLoad += OnLoad;
         }
+
         public Obj_AI_Hero Hero
         {
-            get
-            {
-                return HeroManager.Player;
-            }
+            get { return HeroManager.Player; }
         }
+
         private void OnLoad(EventArgs args)
         {
             if (Hero.ChampionName != "Azir") return;
-   
+
             Game.PrintChat("<b><font color =\"#FF33D6\">Azir creator of Elo Loaded!</font></b>");
             _menu = new AzirMenu("Azir Creator of Elo");
             soldierManager = new SoldierManager();
@@ -51,29 +54,20 @@ namespace Azir_Creator_of_Elo
             _modes = new AzirModes(this);
             Game.OnUpdate += OnUpdate;
             Drawing.OnDraw += Ondraw;
-          walker = new AzirWalker(Menu.GetMenu.SubMenu("Orbwalker"),this);
+            walker = new AzirWalker(Menu.GetMenu.SubMenu("Orbwalker"), this);
         }
-        public  void Orbwalk(Vector3 pos)
+
+        public void Orbwalk(Vector3 pos)
         {
             Orbwalking.Orbwalk(null, pos);
         }
+
         private void Ondraw(EventArgs args)
         {
-            // var ts = TargetSelector.GetSelectedTarget();
-            /* if (ts != null)
-             {
-
-                 var pos = Game.CursorPos.Extend(ts.Position, Game.CursorPos.Distance(ts.Position) - 250);
-                 if (!ts.IsDead)
-                     Drawing.DrawCircle(pos, 50, System.Drawing.Color.Red);
-             }*/
             var drawControl = Menu.GetMenu.Item("dcr").GetValue<bool>();
             var drawFleeMaxRange = Menu.GetMenu.Item("dfr").GetValue<bool>();
             if (drawControl)
-            Render.Circle.DrawCircle(ObjectManager.Player.Position, 925,System.Drawing.Color.GreenYellow );
-      
-
-
+                Render.Circle.DrawCircle(ObjectManager.Player.Position, 925, System.Drawing.Color.GreenYellow);
             var drawLane = Menu.GetMenu.Item("dsl").GetValue<bool>();
             int x = 0;
             if (drawLane)
@@ -85,12 +79,12 @@ namespace Azir_Creator_of_Elo
                     {
                         foreach (Obj_AI_Hero h in HeroManager.Enemies)
                         {
-                            if (m.Distance(h) < 335)
+                            if (m.Distance(h) < 315)
                             {
                                 x++;
-                     
+
                             }
-                        
+
                         }
                         if (x > 0)
                         {
@@ -110,7 +104,7 @@ namespace Azir_Creator_of_Elo
                                 System.Drawing.Color.PaleVioletRed);
                     }
                 }
-     
+
             if (drawFleeMaxRange)
             {
                 // var pos = HeroManager.Player.Position.Extend(Game.CursorPos, 450);

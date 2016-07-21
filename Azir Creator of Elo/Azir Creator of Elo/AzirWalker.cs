@@ -11,16 +11,16 @@ namespace Azir_Free_elo_Machine
 {
     class AzirWalker : Orbwalking.Orbwalker
     {
-        private const int _soldierAARange = 250;
-       public AzirMain azir;
+        private const int SoldierAaRange = 250;
+        private readonly AzirMain _azir;
         public AzirWalker(LeagueSharp.Common.Menu attachToMenu,AzirMain azir) : base(attachToMenu)
         {
-            this.azir = azir;
+            this._azir = azir;
         }
 
         private  float GetDamageValue(Obj_AI_Base target, bool soldierAttack)
         {
-            var d = soldierAttack ?    azir.Hero.GetSpellDamage(target, SpellSlot.W) :azir.Hero.GetAutoAttackDamage(target);
+            var d = soldierAttack ?    _azir.Hero.GetSpellDamage(target, SpellSlot.W) :_azir.Hero.GetAutoAttackDamage(target);
             return target.Health / (float)d;
         }
 
@@ -40,16 +40,14 @@ namespace Azir_Free_elo_Machine
             {
                 return 0;
             }
-
-            //Azir's soldiers can't attack structures.
             if (!(target is Obj_AI_Base))
             {
                 return 0;
             }
 
-            var soldierAArange = _soldierAARange + 65 + target.BoundingRadius;
+            var soldierAArange = SoldierAaRange + 65 + target.BoundingRadius;
             soldierAArange *= soldierAArange;
-            foreach (var soldier in azir.soldierManager.ActiveSoldiers)
+            foreach (var soldier in _azir.soldierManager.ActiveSoldiers)
             {
                 if (soldier.Distance(target, true) <= soldierAArange)
                 {
@@ -79,10 +77,10 @@ namespace Azir_Free_elo_Machine
                     var r = CustomInAutoattackRange(minion);
                     if (r != 0)
                     {
-                        var t = (int)(azir.Hero.AttackCastDelay * 1000) - 100 + Game.Ping / 2;
+                        var t = (int)(_azir.Hero.AttackCastDelay * 1000) - 100 + Game.Ping / 2;
                         var predHealth = HealthPrediction.GetHealthPrediction(minion, t, 0);
 
-                        var damage = (r == 1) ? azir.Hero.GetAutoAttackDamage(minion, true) :azir.Hero.GetSpellDamage(minion, SpellSlot.W);
+                        var damage = (r == 1) ? _azir.Hero.GetAutoAttackDamage(minion, true) :_azir.Hero.GetSpellDamage(minion, SpellSlot.W);
                         if (minion.Team != GameObjectTeam.Neutral && MinionManager.IsMinion(minion, true))
                         {
                             if (predHealth > 0 && predHealth <= damage)
@@ -103,9 +101,9 @@ namespace Azir_Free_elo_Machine
                     posibleTargets.Add(autoAttackTarget, GetDamageValue(autoAttackTarget, false));
                 }
 
-                foreach (var soldier in azir.soldierManager.ActiveSoldiers)
+                foreach (var soldier in _azir.soldierManager.ActiveSoldiers)
                 {
-                    var soldierTarget = TargetSelector.GetTarget(_soldierAARange + 65 + 65, TargetSelector.DamageType.Magical, true, null, soldier.ServerPosition);
+                    var soldierTarget = TargetSelector.GetTarget(SoldierAaRange + 65 + 65, TargetSelector.DamageType.Magical, true, null, soldier.ServerPosition);
                     if (soldierTarget.IsValidTarget())
                     {
                         if (posibleTargets.ContainsKey(soldierTarget))
@@ -123,7 +121,7 @@ namespace Azir_Free_elo_Machine
                 {
                     return posibleTargets.MinOrDefault(p => p.Value).Key;
                 }
-                var soldiers = azir.soldierManager.ActiveSoldiers;
+                var soldiers = _azir.soldierManager.ActiveSoldiers;
                 if (soldiers.Count > 0)
                 {
                     var minions = MinionManager.GetMinions(1100, MinionTypes.All, MinionTeam.NotAlly);
@@ -134,7 +132,7 @@ namespace Azir_Free_elo_Machine
                     {
                         foreach (var minion in minions)
                         {
-                            var soldierAArange = _soldierAARange + 65 + minion.BoundingRadius;
+                            var soldierAArange = SoldierAaRange + 65 + minion.BoundingRadius;
                             soldierAArange *= soldierAArange;
                             if (soldier.Distance(minion, true) < soldierAArange)
                             {

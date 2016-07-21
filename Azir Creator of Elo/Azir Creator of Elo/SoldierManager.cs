@@ -36,6 +36,29 @@ namespace Azir_Creator_of_Elo
         {
             get { return _soldiers.Where(s => s.IsValid && !s.IsDead && !s.IsMoving && (!Animations.ContainsKey(s.NetworkId) || Animations[s.NetworkId] != "Inactive")).ToList(); }
         }
+
+        public bool CheckQCastAtLaneClear(List<Obj_AI_Base> minions ,AzirMain azir)
+        {
+            var nSoldiersToQ = azir.Menu.GetMenu.Item("LQM").GetValue<Slider>().Value;
+            const int attackRange=315;
+            int x=0;
+            foreach (var sol in azir.soldierManager.Soldiers)
+            {
+                if(!sol.IsDead)
+                foreach (var min in minions)
+                {
+                    if(!min.IsDead)
+                    if (min.ServerPosition.Distance(sol.ServerPosition)<= attackRange) //estos estan atacando
+                    {
+                        x++;
+                        break;
+                    }
+                }
+            }
+            int z=azir.soldierManager.Soldiers.Count - x;
+            return z < nSoldiersToQ;
+        }
+
         public Obj_AI_Minion getSoldierOnRange(int range)
         {
           foreach(Obj_AI_Minion sol in ActiveSoldiers)
@@ -48,27 +71,70 @@ namespace Azir_Creator_of_Elo
 
             return null;
         }
-
-        public int SoldiersAttackingn(AzirMain azir,Obj_AI_Hero target)
+        public bool ChecksToCastQHarrash(AzirMain azir, Obj_AI_Hero target)
         {
-         const int soldierAttackRange = 315;
-          var i = 0;
-            foreach (var soldier in azir.soldierManager.Soldiers)
+            if (!azir.Spells.Q.IsReady()) return false;
+            int x = 0; // soldados no atacando
+            var nSoldiersToQ =azir.Menu.GetMenu.Item("SoldiersToQ").GetValue<Slider>().Value;
+            switch (azir._menu.Orb.ActiveMode)
             {
-                if (soldier.Distance(target)<=soldierAttackRange)
-                    i += 1;
+                case LeagueSharp.Common.Orbwalking.OrbwalkingMode.Combo:
+                    nSoldiersToQ = azir.Menu.GetMenu.Item("SoldiersToQ").GetValue<Slider>().Value;
+                    break;
+                case LeagueSharp.Common.Orbwalking.OrbwalkingMode.Mixed:
+                    nSoldiersToQ = azir.Menu.GetMenu.Item("hSoldiersToQ").GetValue<Slider>().Value;
+                    break;
             }
-            return i;
-            //       return (int)(soldiersa);
+            if (!target.IsDead)
+                foreach (Obj_AI_Minion me in azir.soldierManager.Soldiers)
+                {
+                    if (!me.IsDead)
+                    {
+
+                        if (me.Distance(target) > 315)
+                        {
+                            x++;
+
+
+                        }
+
+
+                    }
+                }
+            return x >= nSoldiersToQ;
+
+
 
         }
-        public  bool newSloiderSoon(AzirMain azir)
+        public bool ChecksToCastQ(AzirMain azir, Obj_AI_Hero target)
         {
-            //Console.WriteLine("cd:"+(W.Instance.CooldownExpires-Game.Time));
+            if (!azir.Spells.Q.IsReady()) return false;
+            int x = 0; // soldados no atacando
+           
+            var nSoldiersToQ = azir.Menu.GetMenu.Item("SoldiersToQ").GetValue<Slider>().Value;
+            if (!target.IsDead)
+            foreach (Obj_AI_Minion me in azir.soldierManager.Soldiers)
+            {
+                if (!me.IsDead)
+                {
+                   
+                        if (me.Distance(target) > 315)
+                        {
+                            x++;
+                          
 
-            return (azir.Spells.W.Instance.CooldownExpires - Game.Time) > 0 && (azir.Spells.W.Instance.CooldownExpires - Game.Time) < 0.5f;
+                        }
+
+                    
+                }
+            }
+            return x >= nSoldiersToQ;
+
+
+            
         }
 
+       
         private void Obj_AI_Minion_OnPlayAnimation(Obj_AI_Base sender, GameObjectPlayAnimationEventArgs args)
         {
             if (sender is Obj_AI_Minion && IsSoldier((Obj_AI_Minion)sender))

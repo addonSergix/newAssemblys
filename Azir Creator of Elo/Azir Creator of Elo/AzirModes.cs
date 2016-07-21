@@ -11,19 +11,22 @@ namespace Azir_Creator_of_Elo
 {
     class AzirModes : Modes
     {
-        public JumpLogic jump;
-        public Insec insec;
+        public readonly JumpLogic _jump;
+        private Insec _insec;
+
+                            
         public AzirModes(AzirMain azir)
         {
-            jump = new JumpLogic(azir);
-            insec = new Insec(azir);
+            _jump = new JumpLogic(azir);
+            _insec = new Insec(azir);
         }
+
         public override void Update(AzirMain azir)
         {
 
             base.Update(azir);
 
-         
+
 
             if (azir.Menu.GetMenu.Item("fleekey").GetValue<KeyBind>().Active)
             {
@@ -31,39 +34,24 @@ namespace Azir_Creator_of_Elo
                 Jump(azir);
             }
 
-     
+
         }
-    /*    public void Insec(AzirMain azir)
-        {
-            var ts = TargetSelector.GetTarget(azir.Spells.Q.Range, TargetSelector.DamageType.Magical);
-            if (ts != null)
-            {
 
-                if(azir.Spells.R.IsReady())
-                jump.insec(ts);
-              
-                    }
-        }*/
-        public  void Jump(AzirMain azir)
+        public void Jump(AzirMain azir)
         {
-            jump.updateLogic(Game.CursorPos);
-
+            _jump.updateLogic(Game.CursorPos);
         }
 
         public override void Harash(AzirMain azir)
         {
-
             var wCount = ObjectManager.Player.Spellbook.GetSpell(SpellSlot.W).Ammo;
             var useQ = azir.Menu.GetMenu.Item("HQ").GetValue<bool>();
             var useW = azir.Menu.GetMenu.Item("HW").GetValue<bool>();
             var savew = azir.Menu.GetMenu.Item("HW2").GetValue<bool>();
-            var nSoldiersToQ = azir.Menu.GetMenu.Item("hSoldiersToQ").GetValue<Slider>().Value;
             base.Harash(azir);
             var target = TargetSelector.GetTarget(900, TargetSelector.DamageType.Magical);
             if (target != null)
             {
- 
-         
                 if (target.Distance(azir.Hero.ServerPosition) < 450)
                 {
                     var pred = azir.Spells.W.GetPrediction(target);
@@ -76,87 +64,100 @@ namespace Azir_Creator_of_Elo
                         else
                         {
                             if (useW)
-                                if(azir.Spells.W.IsReady())
-                                azir.Spells.W.Cast(pred.CastPosition);
+                                if (azir.Spells.W.IsReady())
+                                    azir.Spells.W.Cast(pred.CastPosition);
                         }
                     }
                 }
                 else
                 {
-                    //    if (azir.Spells.Q.Level > 0 && azir.Spells.Q.IsReady())
-                    //      if((!savew &&(savew&& (wCount > 0))))
-                    if (savew && (wCount == 1))
-                    {
-
-                    }
-                    else
+                    if (!savew || (wCount != 1))
                     {
                         if (useW)
                             azir.Spells.W.Cast(azir.Hero.Position.Extend(target.ServerPosition, 450));
                     }
+
                 }
-                if(!azir.soldierManager.newSloiderSoon(azir)&&azir.soldierManager.SoldiersAttackingn(azir,target)<=nSoldiersToQ)
-                StaticSpells.CastQ(azir, target, useQ, nSoldiersToQ);
-             
+                var checksQ = azir.soldierManager.ChecksToCastQ(azir, target);
+                if (checksQ)
+                    StaticSpells.CastQ(azir, target, useQ);
+
             }
         }
+
         public override void Laneclear(AzirMain azir)
         {
             var useQ = azir.Menu.GetMenu.Item("LQ").GetValue<bool>();
             var useW = azir.Menu.GetMenu.Item("LW").GetValue<bool>();
+            var minToW = azir.Menu.GetMenu.Item("LWM").GetValue<Slider>().Value;
             base.Laneclear(azir);
-            var minion = MinionManager.GetMinions(azir.Spells.Q.Range, MinionTypes.All, MinionTeam.Enemy, MinionOrderTypes.MaxHealth).FirstOrDefault();
-            if (minion != null)
+     
+            // wpart
+            List<Obj_AI_Base>  minionW =
+   MinionManager.GetMinions(
+                           azir.Hero.Position,
+                            azir.Spells.W.Range,
+                            MinionTypes.All,
+                            MinionTeam.NotAlly,
+                            MinionOrderTypes.MaxHealth);
+            if (minionW != null&&useW)
             {
-                if (azir.Spells.W.IsInRange(minion))
+                MinionManager.FarmLocation wFarmLocation = azir.Spells.W.GetCircularFarmLocation(minionW,
+                    315);
+                if (wFarmLocation.MinionsHit >= minToW)
                 {
-                    var pred = azir.Spells.W.GetPrediction(minion);
-                    if (pred.Hitchance >= HitChance.High)
-                    {
-                        if (useW)
-                            azir.Spells.W.Cast(pred.CastPosition);
-                    }
-                    if (azir.soldierManager.SoldiersAttacking(azir) == false && azir.soldierManager.ActiveSoldiers.Count > 0)
-                    {
-                        pred = azir.Spells.Q.GetPrediction(minion);
-                        if (pred.Hitchance >= HitChance.High)
-                        {
-                            if (useQ)
-                                azir.Spells.Q.Cast(pred.CastPosition);
-                        }
-                    }
+                    azir.Spells.W.Cast(wFarmLocation.Position);
+                }
+            }
+            List<Obj_AI_Base> minionQ =
+MinionManager.GetMinions(
+                      azir.Hero.Position,
+                       azir.Spells.Q.Range,
+                       MinionTypes.All,
+                       MinionTeam.NotAlly,
+                       MinionOrderTypes.MaxHealth);
+            if (minionQ != null && useQ&&azir.soldierManager.CheckQCastAtLaneClear(minionQ,azir))
+            {
+                
+                MinionManager.FarmLocation wFarmLocation = azir.Spells.Q.GetCircularFarmLocation(minionW,
+                    315);
+                if (wFarmLocation.MinionsHit >= minToW)
+                {
+                    azir.Spells.Q.Cast(wFarmLocation.Position);
                 }
             }
         }
+
         public override void Jungleclear(AzirMain azir)
         {
             var useW = azir.Menu.GetMenu.Item("JW").GetValue<bool>();
             base.Jungleclear(azir);
-            var minion = MinionManager.GetMinions(azir.Spells.Q.Range, MinionTypes.All, MinionTeam.Neutral, MinionOrderTypes.MaxHealth).FirstOrDefault();
-            if (minion != null)
+            var minion =
+                MinionManager.GetMinions(azir.Spells.Q.Range, MinionTypes.All, MinionTeam.Neutral,
+                    MinionOrderTypes.MaxHealth).FirstOrDefault();
+            if (minion == null) return;
+
+
+            if (azir.Spells.W.IsInRange(minion))
             {
-                if (azir.Spells.W.IsInRange(minion))
+                var pred = azir.Spells.W.GetPrediction(minion);
+                if (pred.Hitchance >= HitChance.High)
                 {
-                    var pred = azir.Spells.W.GetPrediction(minion);
-                    if (pred.Hitchance >= HitChance.High)
-                    {
-                        if (useW)
-                            azir.Spells.W.Cast(pred.CastPosition);
-                    }
-             
-                    
+                    if (useW)
+                        azir.Spells.W.Cast(pred.CastPosition);
                 }
+
+
             }
         }
 
         public override void Combo(AzirMain azir)
         {
 
-            var useQ= azir.Menu.GetMenu.Item("CQ").GetValue<bool>();
+            var useQ = azir.Menu.GetMenu.Item("CQ").GetValue<bool>();
             var useW = azir.Menu.GetMenu.Item("CW").GetValue<bool>();
-            var nSoldiersToQ = azir.Menu.GetMenu.Item("SoldiersToQ").GetValue<Slider>().Value;
             base.Combo(azir);
-            var target  = TargetSelector.GetTarget(900, TargetSelector.DamageType.Magical);
+            var target = TargetSelector.GetTarget(900, TargetSelector.DamageType.Magical);
             if (target == null) return;
 
             if (target.Distance(azir.Hero.ServerPosition) < 450)
@@ -178,31 +179,22 @@ namespace Azir_Creator_of_Elo
             }
             else
             {
-                if(azir.Spells.Q.Level>0&& azir.Spells.Q.IsReady())
-                    if(useW)
-                        if(target.Distance(HeroManager.Player)<=750)
+                if (azir.Spells.Q.Level > 0 && azir.Spells.Q.IsReady())
+                    if (useW)
+                        if (target.Distance(HeroManager.Player) <= 750)
                             azir.Spells.W.Cast(azir.Hero.Position.Extend(target.ServerPosition, 450));
             }
-            //Q
-
-            if (!azir.soldierManager.newSloiderSoon(azir) && azir.Spells.Q.IsReady()&&azir.soldierManager.Soldiers.Count>0&&azir.soldierManager.SoldiersAttackingn(azir,target) >= nSoldiersToQ)
+            //Qc casting
+            var checksQ = azir.soldierManager.ChecksToCastQ(azir, target);
+            if (checksQ)
             {
+                StaticSpells.CastQ(azir, target, useQ);
+            }
 
-              StaticSpells.CastQ(azir, target, useQ, nSoldiersToQ);
-            }
-            if (azir.Spells.Q.IsKillable(target)&&useQ)
-            {
-                if (target.Health < azir.Spells.Q.GetDamage(target))
-                {
-                    var pred = azir.Spells.Q.GetPrediction(target);
-                    if (pred.Hitchance >= HitChance.High)
-                    {
-                 //       Game.PrintChat("Killeable with q");
-                        azir.Spells.Q.Cast(pred.CastPosition);
-                    }
-                }
-            }
-         else if (azir.Spells.R.IsKillable(target))
+
+
+
+            else if (azir.Spells.R.IsKillable(target))
             {
                 if (azir.Menu.GetMenu.Item("CR").GetValue<bool>())
                 {

@@ -1,4 +1,3 @@
-C:\Users\sergi\Documents\GitHub\newAssemblys\Azir Creator of Elo\Azir Creator of Elo\obj\Debug\Azir Creator of Elo.csprojResolveAssemblyReference.cache
 C:\Users\sergi\Documents\GitHub\newAssemblys\Azir Creator of Elo\Azir Creator of Elo\bin\Debug\Azir Free elo Machine.exe.config
 C:\Users\sergi\Documents\GitHub\newAssemblys\Azir Creator of Elo\Azir Creator of Elo\bin\Debug\Azir Free elo Machine.exe
 C:\Users\sergi\Documents\GitHub\newAssemblys\Azir Creator of Elo\Azir Creator of Elo\bin\Debug\Azir Free elo Machine.pdb
