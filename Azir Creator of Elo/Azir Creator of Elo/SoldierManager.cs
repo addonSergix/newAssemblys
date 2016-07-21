@@ -55,8 +55,7 @@ namespace Azir_Creator_of_Elo
         int i = 0;
             foreach (var soldier in azir.soldierManager.Soldiers)
             {
-                if (Vector2.DistanceSquared(target.Position.To2D(), soldier.Position.To2D()) <=
-                    SoldierAttackRange*SoldierAttackRange)
+                if (soldier.Distance(target)<=SoldierAttackRange)
                     i += 1;
             }
             return i;
