@@ -12,7 +12,7 @@ namespace Azir_Creator_of_Elo
 {
     internal class AzirMain
     {
-        public AzirWalker walker;
+
         private Spells _spells;
         public Menu _menu;
         public AzirModes _modes;
@@ -47,14 +47,15 @@ namespace Azir_Creator_of_Elo
         {
             if (Hero.ChampionName != "Azir") return;
 
-            Game.PrintChat("<b><font color =\"#FF33D6\">Azir creator of Elo Loaded!</font></b>");
-            _menu = new AzirMenu("Azir Creator of Elo");
+            Game.PrintChat("<b><font color =\"#FF33D6\">Azir Elo Machine Loaded!</font></b>");
+
+            _menu = new AzirMenu("Azir Elo Machine",this);
             soldierManager = new SoldierManager();
             _spells = new Spells();
             _modes = new AzirModes(this);
             Game.OnUpdate += OnUpdate;
             Drawing.OnDraw += Ondraw;
-            walker = new AzirWalker(Menu.GetMenu.SubMenu("Orbwalker"), this);
+           
         }
 
         public void Orbwalk(Vector3 pos)
@@ -98,9 +99,9 @@ namespace Azir_Creator_of_Elo
                         var wtssxt = Drawing.WorldToScreen(HeroManager.Player.ServerPosition);
 
                         if (m.Distance(HeroManager.Player) < 950)
-                            Drawing.DrawLine(wts[0], wts[1], wtssxt[0], wtssxt[1], 5f, System.Drawing.Color.GreenYellow);
+                            Drawing.DrawLine(wts[0], wts[1], wtssxt[0], wtssxt[1], 2f, System.Drawing.Color.GreenYellow);
                         else
-                            Drawing.DrawLine(wts[0], wts[1], wtssxt[0], wtssxt[1], 5f,
+                            Drawing.DrawLine(wts[0], wts[1], wtssxt[0], wtssxt[1], 2f,
                                 System.Drawing.Color.PaleVioletRed);
                     }
                 }
@@ -109,7 +110,7 @@ namespace Azir_Creator_of_Elo
             {
                 // var pos = HeroManager.Player.Position.Extend(Game.CursorPos, 450);
 
-                Render.Circle.DrawCircle(Hero.Position, 1150 + 350, System.Drawing.Color.GreenYellow);
+                Render.Circle.DrawCircle(Hero.Position, 1150 + 350, System.Drawing.Color.GreenYellow,2);
             }
 
 

@@ -1,13 +1,10 @@
-﻿using LeagueSharp;
+﻿using System.Linq;
+using Azir_Creator_of_Elo;
+using LeagueSharp;
 using LeagueSharp.Common;
 using SharpDX;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Azir_Creator_of_Elo
+namespace Azir_Free_elo_Machine
 {
 
     class JumpLogic
@@ -19,22 +16,55 @@ namespace Azir_Creator_of_Elo
         {
             this.azir = azir;
         }
+        private static Vector3 startPos = new Vector3();
+
+        public bool checkSpells()
+        {
+            if(azir.Spells.Q.IsReady())
+                if(azir.Spells.E.IsReady())
+                    if (azir.Spells.W.IsReady())
+                        return true;
+            return false;
+        }
         public void updateLogic(Vector3 position)
         {
-            if (azir.Spells.W.IsReady() && azir.Spells.Q.IsReady() && azir.Spells.E.IsReady())//&&R.IsReady())
+            var mx =  azir.Menu.GetMenu.Item("FMJ").GetValue<bool>();
+            var closet = getClosestSolider(position, azir);
+         
+            if (checkSpells()&&(closet==null))//&&R.IsReady())
             {
-             //   if (azir.soldierManager.ActiveSoldiers.Count == 0|| azir.soldierManager.ActiveSoldiers.Min(t=>t.Distance(Game.CursorPos))>azir.Hero.Distance(Game.CursorPos) )
-               // {
+
                     azir.Spells.W.Cast(HeroManager.Player.Position.Extend(position, 450));
-                    Utility.DelayAction.Add(Game.Ping + 150, () => azir.Spells.E.Cast(azir.soldierManager.Soldiers[azir.soldierManager.Soldiers.Count - 1].ServerPosition));
-                //}
-                //else
-                //{
-                //    Utility.DelayAction.Add(Game.Ping + 150, () => azir.Spells.E.Cast(azir.soldierManager.Soldiers[azir.soldierManager.Soldiers.Count - 1].ServerPosition));
-               // }
+        
                
-                Utility.DelayAction.Add(Game.Ping + 400, () => fleeq(position));
+
             }
+            if (closet == null)
+                return;
+            if (azir.Spells.E.IsReady())
+            {
+                startPos =azir.Hero.ServerPosition;
+                azir.Spells.E.CastOnUnit(closet);
+            }
+            var playDisToSoli = azir.Hero.Distance(closet);
+            if (azir.Hero.IsDashing() && playDisToSoli < 95)
+            {
+                if (mx)
+                {
+                    if (azir.Spells.Q.IsReady() )
+                        azir.Spells.Q.Cast(azir.Hero.ServerPosition.Extend(position,1234));
+                }
+                else
+                {
+                    if (azir.Spells.Q.IsReady() && position.Distance(azir.Hero.ServerPosition)>=200)
+                        azir.Spells.Q.Cast(position);
+                }
+            }
+
+        }
+        public static Obj_AI_Minion getClosestSolider(Vector3 pos,AzirMain azir)
+        {
+            return azir.soldierManager.Soldiers.Where(sol => !sol.IsDead).OrderBy(sol => sol.Distance(pos, true) - ((sol.IsMoving) ? 500 : 0)).FirstOrDefault();
         }
         public void fleeTopos(Vector3 position)
         {
