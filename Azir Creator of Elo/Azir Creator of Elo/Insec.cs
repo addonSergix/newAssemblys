@@ -36,7 +36,7 @@ namespace Azir_Free_elo_Machine
 
         private void Drawing_OnDraw(EventArgs args)
         {
-            return;
+          
             var target = TargetSelector.GetSelectedTarget();
             /*     var posWs = GeoAndExten.GetWsPosition(target.Position.To2D()).Where(x => x != null);
                  foreach (var posW in posWs)
@@ -49,18 +49,18 @@ namespace Azir_Free_elo_Machine
                 {
                     if (target.IsVisible && target.IsValid)
                     {
-                        var pos = target.ServerPosition.Extend(Game.CursorPos, -300);
-                        Render.Circle.DrawCircle(pos, 100, System.Drawing.Color.GreenYellow);
+                 //       var pos = target.ServerPosition.Extend(Game.CursorPos, -300);
+                   //     Render.Circle.DrawCircle(pos, 100, System.Drawing.Color.GreenYellow);
                     }
                 }
             }
             else
             {
                 var pos = target.ServerPosition.Extend(Clickposition, -300);
-                Render.Circle.DrawCircle(pos, 100, System.Drawing.Color.GreenYellow);
-                Render.Circle.DrawCircle(Clickposition, 100, System.Drawing.Color.GreenYellow);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                Render.Circle.DrawCircle(pos, 100, System.Drawing.Color.GreenYellow,2);
+                Render.Circle.DrawCircle(Clickposition, 100, System.Drawing.Color.GreenYellow,2);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
             }
-
+            
         }
         Vector3 Clickposition;
 

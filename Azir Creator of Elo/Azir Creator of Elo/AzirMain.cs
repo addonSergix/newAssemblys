@@ -68,7 +68,7 @@ namespace Azir_Creator_of_Elo
             var drawControl = Menu.GetMenu.Item("dcr").GetValue<bool>();
             var drawFleeMaxRange = Menu.GetMenu.Item("dfr").GetValue<bool>();
             if (drawControl)
-                Render.Circle.DrawCircle(ObjectManager.Player.Position, 925, System.Drawing.Color.GreenYellow);
+                Render.Circle.DrawCircle(ObjectManager.Player.Position, 925, System.Drawing.Color.GreenYellow,2);
             var drawLane = Menu.GetMenu.Item("dsl").GetValue<bool>();
             int x = 0;
             if (drawLane)
