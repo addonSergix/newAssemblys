@@ -42,7 +42,7 @@ namespace Azir_Creator_of_Elo
         }
         public void loadDrawings()
         {
-            _drawSettingsMenu = new LeagueSharp.Common.Menu("Draw Settings", "Draw Settings");
+            _drawSettingsMenu = new LeagueSharp.Common.Menu("Drawings", "Draw Settings");
             {
                 _drawSettingsMenu.AddItem(new MenuItem("dsl", "Draw Soldier Line").SetValue(true));
                 _drawSettingsMenu.AddItem(new MenuItem("dcr", "Draw Control range").SetValue(true));
@@ -75,7 +75,7 @@ namespace Azir_Creator_of_Elo
             _JungleClearMenu = new LeagueSharp.Common.Menu("JungleClear Menu", "JungleClear  Menu");
             {
                 _JungleClearMenu.AddItem(new MenuItem("JW", "Use W").SetValue(true));
-
+                _JungleClearMenu.AddItem(new MenuItem("JQ", "Use W").SetValue(true));
             }
         }
         public void loadHarashMenu()

@@ -47,7 +47,7 @@ namespace Azir_Free_elo_Machine
                 azir.Spells.E.CastOnUnit(closet);
             }
             var playDisToSoli = azir.Hero.Distance(closet);
-            if (azir.Hero.IsDashing() && playDisToSoli < 130)
+            if (azir.Hero.IsDashing() && playDisToSoli < 150)
             {
                 if (mx)
                 {

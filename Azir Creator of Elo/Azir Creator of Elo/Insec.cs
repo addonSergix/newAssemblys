@@ -57,7 +57,7 @@ namespace Azir_Free_elo_Machine
             else
             {
                 var pos = target.ServerPosition.Extend(Clickposition, -300);
-                Render.Circle.DrawCircle(pos, 100, System.Drawing.Color.GreenYellow,2);
+             //   Render.Circle.DrawCircle(pos, 100, System.Drawing.Color.GreenYellow,2);
                 Render.Circle.DrawCircle(Clickposition, 100, System.Drawing.Color.GreenYellow,2);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
             }
             
@@ -167,6 +167,7 @@ namespace Azir_Free_elo_Machine
 
                         else
                         {
+                          
                             azir.Spells.R.Cast(insecPoint);
                             steps = Steps.firstCalcs;
                         }
