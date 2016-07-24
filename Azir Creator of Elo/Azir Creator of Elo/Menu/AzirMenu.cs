@@ -12,25 +12,25 @@ namespace Azir_Creator_of_Elo
         private LeagueSharp.Common.Menu _drawSettingsMenu, _jumpMenu,_comboMenu, _harashMenu, _laneClearMenu, _JungleClearMenu;
         public AzirMenu(String name,AzirMain  azir) : base(name)
         {
-            loadMenu(azir);
-            closeMenu();
+            LoadMenu(azir);
+            CloseMenu();
         }
-        public override void loadMenu(AzirMain azir)
+        public override void LoadMenu(AzirMain azir)
         {
-            base.loadMenu(azir);
-            loadLaneClearMenu();
-            loadHarashMenu();
-            loadComboMenu();
-            loadJungleClearMenu();
-            loadDrawings();
-            loadJumps();
+            base.LoadMenu(azir);
+            LoadLaneClearMenu();
+            LoadHarashMenu();
+            LoadComboMenu();
+            LoadJungleClearMenu();
+            LoadDrawings();
+            LoadJumps();
         }
 
-        public override void closeMenu()
+        public override void CloseMenu()
         {
             // add menus
 
-            base.closeMenu();
+            base.CloseMenu();
             base.GetMenu.AddSubMenu(_comboMenu);
             base.GetMenu.AddSubMenu(_harashMenu);
             base.GetMenu.AddSubMenu(_jumpMenu);
@@ -40,7 +40,7 @@ namespace Azir_Creator_of_Elo
             base.GetMenu.AddToMainMenu();
 
         }
-        public void loadDrawings()
+        public void LoadDrawings()
         {
             _drawSettingsMenu = new LeagueSharp.Common.Menu("Drawings", "Draw Settings");
             {
@@ -49,7 +49,7 @@ namespace Azir_Creator_of_Elo
                 _drawSettingsMenu.AddItem(new MenuItem("dfr", "Draw Flee range").SetValue(true));
             }
         }
-        public  void loadComboMenu()
+        public override void LoadComboMenu()
         {
             _comboMenu = new LeagueSharp.Common.Menu("Combo Menu", "Combo Menu");
             {
@@ -59,7 +59,7 @@ namespace Azir_Creator_of_Elo
                 _comboMenu.AddItem(new MenuItem("CR", "Use R killeable").SetValue(true));
             }
         }
-        public void loadLaneClearMenu()
+        public void LoadLaneClearMenu()
         {
             _laneClearMenu = new LeagueSharp.Common.Menu("Laneclear Menu", "Laneclear Menu");
             {
@@ -70,7 +70,7 @@ namespace Azir_Creator_of_Elo
 
             }
         }
-        public void loadJungleClearMenu()
+        public void LoadJungleClearMenu()
         {
             _JungleClearMenu = new LeagueSharp.Common.Menu("JungleClear Menu", "JungleClear  Menu");
             {
@@ -78,7 +78,7 @@ namespace Azir_Creator_of_Elo
                 _JungleClearMenu.AddItem(new MenuItem("JQ", "Use W").SetValue(true));
             }
         }
-        public void loadHarashMenu()
+        public void LoadHarashMenu()
         {
             _harashMenu = new LeagueSharp.Common.Menu("Harash Menu", "Harash Menu");
             {
@@ -88,7 +88,7 @@ namespace Azir_Creator_of_Elo
                 _harashMenu.AddItem(new MenuItem("HW2", "Save on 1 w for flee").SetValue(true));
             }
         }
-        public void loadJumps()
+        public void LoadJumps()
         {
             _jumpMenu = new LeagueSharp.Common.Menu("Key Menu", "Key Menu");
             {

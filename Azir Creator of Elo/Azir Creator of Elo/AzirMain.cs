@@ -12,36 +12,25 @@ namespace Azir_Creator_of_Elo
 {
     internal class AzirMain
     {
-
-        private Spells _spells;
         public Menu _menu;
         public AzirModes _modes;
         private string tittle, version;
 
-        public Azir_Creator_of_Elo.Spells Spells
-        {
-            get { return _spells; }
-        }
+        public Azir_Creator_of_Elo.Spells Spells { get; private set; }
 
-        public Azir_Creator_of_Elo.Menu Menu
-        {
-            get { return _menu; }
-        }
+        public Azir_Creator_of_Elo.Menu Menu => _menu;
 
-        public SoldierManager soldierManager;
+        public SoldierManager SoldierManager;
 
         public AzirMain()
         {
 
             tittle = "[Azir]Azir Updated June 2016";
-            version = "1.0.0.0";
+            version = "1.0.1.2";
             CustomEvents.Game.OnGameLoad += OnLoad;
         }
 
-        public Obj_AI_Hero Hero
-        {
-            get { return HeroManager.Player; }
-        }
+        public Obj_AI_Hero Hero => HeroManager.Player;
 
         private void OnLoad(EventArgs args)
         {
@@ -50,8 +39,8 @@ namespace Azir_Creator_of_Elo
             Game.PrintChat("<b><font color =\"#FF33D6\">Azir Elo Machine Loaded!</font></b>");
 
             _menu = new AzirMenu("Azir Elo Machine",this);
-            soldierManager = new SoldierManager();
-            _spells = new Spells();
+            SoldierManager = new SoldierManager();
+            Spells = new Spells();
             _modes = new AzirModes(this);
             Game.OnUpdate += OnUpdate;
             Drawing.OnDraw += Ondraw;
@@ -70,48 +59,30 @@ namespace Azir_Creator_of_Elo
             if (drawControl)
                 Render.Circle.DrawCircle(ObjectManager.Player.Position, 925, System.Drawing.Color.GreenYellow,2);
             var drawLane = Menu.GetMenu.Item("dsl").GetValue<bool>();
-            int x = 0;
+            var x = 0;
             if (drawLane)
 
-                foreach (Obj_AI_Minion m in soldierManager.Soldiers)
+                foreach (var m in SoldierManager.Soldiers)
                 {
-                    //m.tim
-                    if (!m.IsDead)
-                    {
-                        foreach (Obj_AI_Hero h in HeroManager.Enemies)
-                        {
-                            if (m.Distance(h) < 315)
-                            {
-                                x++;
+                
+                    if (m.IsDead) continue;
 
-                            }
+                    x += HeroManager.Enemies.Count(h => m.Distance(h) < 315);
 
-                        }
-                        if (x > 0)
-                        {
-                            Render.Circle.DrawCircle(m.Position, 315, System.Drawing.Color.GreenYellow);
-                        }
-                        else
-                        {
-                            Render.Circle.DrawCircle(m.Position, 315, System.Drawing.Color.PaleVioletRed);
-                        }
-                        var wts = Drawing.WorldToScreen(m.Position);
-                        var wtssxt = Drawing.WorldToScreen(HeroManager.Player.ServerPosition);
+                    Render.Circle.DrawCircle(m.Position, 315,
+                        x > 0 ? System.Drawing.Color.GreenYellow : System.Drawing.Color.PaleVioletRed);
+                    var wts = Drawing.WorldToScreen(m.Position);
+                    var wtssxt = Drawing.WorldToScreen(HeroManager.Player.ServerPosition);
 
-                        if (m.Distance(HeroManager.Player) < 950)
-                            Drawing.DrawLine(wts[0], wts[1], wtssxt[0], wtssxt[1], 2f, System.Drawing.Color.GreenYellow);
-                        else
-                            Drawing.DrawLine(wts[0], wts[1], wtssxt[0], wtssxt[1], 2f,
-                                System.Drawing.Color.PaleVioletRed);
-                    }
+                     Drawing.DrawLine(wts[0], wts[1], wtssxt[0], wtssxt[1], 2f,
+                        m.Distance(HeroManager.Player) < 950
+                            ? System.Drawing.Color.GreenYellow
+                            : System.Drawing.Color.PaleVioletRed);
                 }
 
             if (drawFleeMaxRange)
-            {
-                // var pos = HeroManager.Player.Position.Extend(Game.CursorPos, 450);
-
                 Render.Circle.DrawCircle(Hero.Position, 1150 + 350, System.Drawing.Color.GreenYellow,2);
-            }
+            
 
 
         }

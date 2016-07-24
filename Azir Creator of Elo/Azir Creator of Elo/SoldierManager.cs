@@ -42,7 +42,7 @@ namespace Azir_Creator_of_Elo
             var nSoldiersToQ = azir.Menu.GetMenu.Item("LQM").GetValue<Slider>().Value;
             const int attackRange=315;
             int x=0;
-            foreach (var sol in azir.soldierManager.Soldiers)
+            foreach (var sol in azir.SoldierManager.Soldiers)
             {
                 if(!sol.IsDead)
                 foreach (var min in minions)
@@ -55,7 +55,7 @@ namespace Azir_Creator_of_Elo
                     }
                 }
             }
-            int z=azir.soldierManager.Soldiers.Count - x;
+            int z=azir.SoldierManager.Soldiers.Count - x;
         
             return z >= nSoldiersToQ;
         }
@@ -87,7 +87,7 @@ namespace Azir_Creator_of_Elo
                     break;
             }
             if (!target.IsDead)
-                foreach (Obj_AI_Minion me in azir.soldierManager.Soldiers)
+                foreach (Obj_AI_Minion me in azir.SoldierManager.Soldiers)
                 {
                     if (!me.IsDead)
                     {
@@ -114,7 +114,7 @@ namespace Azir_Creator_of_Elo
            
             var nSoldiersToQ = azir.Menu.GetMenu.Item("SoldiersToQ").GetValue<Slider>().Value;
             if (!target.IsDead)
-            foreach (Obj_AI_Minion me in azir.soldierManager.Soldiers)
+            foreach (Obj_AI_Minion me in azir.SoldierManager.Soldiers)
             {
                 if (!me.IsDead)
                 {
@@ -172,7 +172,7 @@ namespace Azir_Creator_of_Elo
      
         public bool SoldiersAttacking(AzirMain azir)
         {
-            foreach (Obj_AI_Minion m in azir.soldierManager.Soldiers)
+            foreach (Obj_AI_Minion m in azir.SoldierManager.Soldiers)
             {
                
                 foreach (Obj_AI_Hero h in HeroManager.Enemies)

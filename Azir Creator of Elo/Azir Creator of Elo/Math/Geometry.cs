@@ -62,7 +62,7 @@ namespace Azir_Free_elo_Machine.Math
         {
             const float azirSoldierRange = 315;
             var attacksS=0f;
-            foreach (var m in azir.soldierManager.Soldiers)
+            foreach (var m in azir.SoldierManager.Soldiers)
             {
                 if (m.IsDead) continue;
                 var spaceToDoQ = m.ServerPosition.Distance(point);

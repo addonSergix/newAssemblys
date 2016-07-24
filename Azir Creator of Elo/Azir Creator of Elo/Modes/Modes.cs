@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Azir_Creator_of_Elo
 {
-    class Modes
+    internal class Modes
     {
         public virtual void Update(AzirMain azir)
         {
@@ -26,30 +26,33 @@ namespace Azir_Creator_of_Elo
                    Laneclear(azir);
                     Jungleclear(azir);
                     break;
+                case Orbwalking.OrbwalkingMode.LastHit:
+                    break;
+                case Orbwalking.OrbwalkingMode.Freeze:
+                    break;
+                case Orbwalking.OrbwalkingMode.CustomMode:
+                    break;
+                case Orbwalking.OrbwalkingMode.None:
+                    break;
+                default:
+                    break;
             }
-      
-
         }
+
         public virtual void Jungleclear(AzirMain azir)
         {
-
         }
 
         public virtual void Laneclear(AzirMain azir)
         {
-        
         }
 
         public virtual void Harash(AzirMain azir)
         {
-        
         }
 
         public virtual void Combo(AzirMain azir)
         {
-          
-      
-
         }
     }
 }

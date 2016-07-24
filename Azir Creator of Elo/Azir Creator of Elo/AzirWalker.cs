@@ -47,7 +47,7 @@ namespace Azir_Free_elo_Machine
 
             var soldierAArange = SoldierAaRange + 65 + target.BoundingRadius;
             soldierAArange *= soldierAArange;
-            foreach (var soldier in _azir.soldierManager.ActiveSoldiers)
+            foreach (var soldier in _azir.SoldierManager.ActiveSoldiers)
             {
                 if (soldier.Distance(target, true) <= soldierAArange)
                 {
@@ -101,7 +101,7 @@ namespace Azir_Free_elo_Machine
                     posibleTargets.Add(autoAttackTarget, GetDamageValue(autoAttackTarget, false));
                 }
 
-                foreach (var soldier in _azir.soldierManager.ActiveSoldiers)
+                foreach (var soldier in _azir.SoldierManager.ActiveSoldiers)
                 {
                     var soldierTarget = TargetSelector.GetTarget(SoldierAaRange + 65 + 65, TargetSelector.DamageType.Magical, true, null, soldier.ServerPosition);
                     if (soldierTarget.IsValidTarget())
@@ -121,7 +121,7 @@ namespace Azir_Free_elo_Machine
                 {
                     return posibleTargets.MinOrDefault(p => p.Value).Key;
                 }
-                var soldiers = _azir.soldierManager.ActiveSoldiers;
+                var soldiers = _azir.SoldierManager.ActiveSoldiers;
                 if (soldiers.Count > 0)
                 {
                     var minions = MinionManager.GetMinions(1100, MinionTypes.All, MinionTeam.NotAlly);

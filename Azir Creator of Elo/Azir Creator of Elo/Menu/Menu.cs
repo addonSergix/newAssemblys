@@ -11,37 +11,30 @@ namespace Azir_Creator_of_Elo
     class Menu
     {
         private AzirWalker walker;
-        private LeagueSharp.Common.Menu menu;
-        public LeagueSharp.Common.Menu GetMenu
-        {
-            get { return menu; }
-        }
+        public LeagueSharp.Common.Menu GetMenu { get; private set; }
         private string _menuName;
-        private Orbwalking.Orbwalker orb;
-        public Orbwalking.Orbwalker Orb
-        {
-            get { return orb; }
-        }
+        public Orbwalking.Orbwalker Orb { get; private set; }
+
         LeagueSharp.Common.Menu _orbWalkerMenu, _targetSelectorMenu;
         public Menu(string menuName)
         {
             this._menuName = menuName;
         }
-        public virtual void loadMenu(AzirMain azir)
+        public virtual void LoadMenu(AzirMain azir)
         {
-            menu = new LeagueSharp.Common.Menu(_menuName, _menuName, true);
+            GetMenu = new LeagueSharp.Common.Menu(_menuName, _menuName, true);
         _orbWalkerMenu = new LeagueSharp.Common.Menu("Orbwalker", "Orbwalker");
-            orb = new AzirWalker(_orbWalkerMenu, azir);
+            Orb = new AzirWalker(_orbWalkerMenu, azir);
             _targetSelectorMenu = new LeagueSharp.Common.Menu("TargetSelector", "TargetSelector");
         }
-        public virtual void closeMenu()
+        public virtual void CloseMenu()
         {
             TargetSelector.AddToMenu(_targetSelectorMenu);
-            menu.AddSubMenu(_orbWalkerMenu);        //ORBWALKER
-            menu.AddSubMenu(_targetSelectorMenu);
+            GetMenu.AddSubMenu(_orbWalkerMenu);        //ORBWALKER
+            GetMenu.AddSubMenu(_targetSelectorMenu);
           
         }
-        public virtual void loadComboMenu()
+        public virtual void LoadComboMenu()
         {
 
         }
