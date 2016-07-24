@@ -137,7 +137,7 @@ namespace Azir_Free_elo_Machine
             {
         
                 case Steps.firstCalcs:
-                    if (target.Distance(HeroManager.Player) <= azir.Spells.Q.Range)
+                    if (target.Distance(HeroManager.Player) <= azir.Spells.W.Range + azir.Spells.Q.Range)
                     {
 
                         steps = Steps.jump;
