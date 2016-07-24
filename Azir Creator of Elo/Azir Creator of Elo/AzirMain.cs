@@ -12,6 +12,35 @@ namespace Azir_Creator_of_Elo
 {
     internal class AzirMain
     {
+        public GapcloserList gapcloserList;
+        public List<String> InterruptSpell;
+      public readonly string[] Gapcloser = new[]
+            {
+                "AkaliShadowDance", "Headbutt", "DianaTeleport", "IreliaGatotsu", "JaxLeapStrike", "JayceToTheSkies",
+                "MaokaiUnstableGrowth", "MonkeyKingNimbus", "Pantheon_LeapBash", "PoppyHeroicCharge", "QuinnE",
+                "XenZhaoSweep", "blindmonkqtwo", "FizzPiercingStrike", "RengarLeap"
+            };
+       public readonly string[] Interrupt = new[]
+           {
+                "KatarinaR", "GalioIdolOfDurand", "Crowstorm", "Drain", "AbsoluteZero", "ShenStandUnited", "UrgotSwap2",
+                "AlZaharNetherGrasp", "FallenOne", "Pantheon_GrandSkyfall_Jump", "VarusQ", "CaitlynAceintheHole",
+                "MissFortuneBulletTime", "InfiniteDuress", "LucianR"
+            };
+        public SpellSlot Trans(int i)
+        {
+            switch (i)
+            {
+                case 0:
+                    return SpellSlot.Q;
+                case 1:
+                    return SpellSlot.W;
+                case 2:
+                    return SpellSlot.E;
+                case 3:
+                    return SpellSlot.R;
+            }
+            return SpellSlot.Q;
+        }
         public Menu _menu;
         public AzirModes _modes;
         private string tittle, version;
@@ -21,6 +50,8 @@ namespace Azir_Creator_of_Elo
         public Azir_Creator_of_Elo.Menu Menu => _menu;
 
         public SoldierManager SoldierManager;
+        internal int InterruptNum;
+        internal int GapcloserNum;
 
         public AzirMain()
         {
@@ -37,7 +68,7 @@ namespace Azir_Creator_of_Elo
             if (Hero.ChampionName != "Azir") return;
 
             Game.PrintChat("<b><font color =\"#FF33D6\">Azir Elo Machine Loaded!</font></b>");
-
+            this.gapcloserList=new GapcloserList();
             _menu = new AzirMenu("Azir Elo Machine",this);
             SoldierManager = new SoldierManager();
             Spells = new Spells();

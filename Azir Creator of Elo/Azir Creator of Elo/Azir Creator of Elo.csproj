@@ -55,6 +55,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AzirMain.cs" />
+    <Compile Include="Events\Events.cs" />
+    <Compile Include="Events\GapcloserLoad.cs" />
+    <Compile Include="Events\GapcloserObj.cs" />
     <Compile Include="Menu\AzirMenu.cs" />
     <Compile Include="Modes\AzirModes.cs" />
     <Compile Include="AzirWalker.cs" />
