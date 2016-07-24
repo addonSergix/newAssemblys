@@ -34,7 +34,7 @@ namespace Azir_Free_elo_Machine
                 //    Utility.DelayAction.Add(Game.Ping + 150, () => azir.Spells.E.Cast(azir.soldierManager.Soldiers[azir.soldierManager.Soldiers.Count - 1].ServerPosition));
                 // }
 
-                Utility.DelayAction.Add(Game.Ping + 400, () => fleeq(position));
+                Utility.DelayAction.Add(Game.Ping + 400, () => fleeq());
             }
         }
 
@@ -51,15 +51,15 @@ namespace Azir_Free_elo_Machine
             }
         }
 
-        public void fleeq(Vector2 position)
+        public void fleeq()
         {
-            if (Vector2.Distance(HeroManager.Player.ServerPosition.To2D(), position) < azir.Spells.Q.Range)
+            if (Vector2.Distance(HeroManager.Player.ServerPosition.To2D(), Game.CursorPos.To2D()) < azir.Spells.Q.Range)
             {
-                azir.Spells.Q.Cast(position);
+                azir.Spells.Q.Cast(Game.CursorPos);
             }
             else
             {
-                azir.Spells.Q.Cast(HeroManager.Player.Position.Extend(position.To3D(), 1150));
+                azir.Spells.Q.Cast(HeroManager.Player.Position.Extend(Game.CursorPos, 1150));
             }
         }
 
