@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Azir_Creator_of_Elo;
 using LeagueSharp;
 using LeagueSharp.Common;
@@ -35,6 +36,38 @@ namespace Azir_Free_elo_Machine
                 // }
 
                 Utility.DelayAction.Add(Game.Ping + 400, () => fleeq());
+            }
+        }
+        public void updateLogicJumpInsec(Vector3 position)
+        {
+            if (azir.Spells.W.IsReady() && azir.Spells.Q.IsReady() && azir.Spells.E.IsReady()) //&&R.IsReady())
+            {
+                //   if (azir.soldierManager.ActiveSoldiers.Count == 0|| azir.soldierManager.ActiveSoldiers.Min(t=>t.Distance(Game.CursorPos))>azir.Hero.Distance(Game.CursorPos) )
+                // {
+                azir.Spells.W.Cast(HeroManager.Player.Position.Extend(position, 450));
+                Utility.DelayAction.Add(Game.Ping + 150,
+                    () =>
+                        azir.Spells.E.Cast(
+                            azir.SoldierManager.Soldiers[azir.SoldierManager.Soldiers.Count - 1].ServerPosition));
+                //}
+                //else
+                //{
+                //    Utility.DelayAction.Add(Game.Ping + 150, () => azir.Spells.E.Cast(azir.soldierManager.Soldiers[azir.soldierManager.Soldiers.Count - 1].ServerPosition));
+                // }
+
+                Utility.DelayAction.Add(Game.Ping + 400, () => fleeqToInsec(position));
+            }
+        }
+
+        private void fleeqToInsec(Vector3 position)
+        {
+            if (Vector2.Distance(HeroManager.Player.ServerPosition.To2D(), position.To2D()) < azir.Spells.Q.Range)
+            {
+                azir.Spells.Q.Cast(position);
+            }
+            else
+            {
+                azir.Spells.Q.Cast(HeroManager.Player.Position.Extend(position, 1150));
             }
         }
 
