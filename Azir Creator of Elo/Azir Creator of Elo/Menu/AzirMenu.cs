@@ -75,7 +75,7 @@ namespace Azir_Creator_of_Elo
             _JungleClearMenu = new LeagueSharp.Common.Menu("JungleClear Menu", "JungleClear  Menu");
             {
                 _JungleClearMenu.AddItem(new MenuItem("JW", "Use W").SetValue(true));
-                _JungleClearMenu.AddItem(new MenuItem("JQ", "Use W").SetValue(true));
+                _JungleClearMenu.AddItem(new MenuItem("JQ", "Use Q").SetValue(true));
             }
         }
         public void LoadHarashMenu()
