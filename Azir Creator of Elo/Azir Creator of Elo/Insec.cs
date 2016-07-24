@@ -95,7 +95,7 @@ namespace Azir_Free_elo_Machine
         private void Game_OnUpdate(EventArgs args)
         {
 
-            //   if (!azir.Spells.R.IsReady()) return;
+               if (!azir.Spells.R.IsReady()) return;
             var insecPoint = new Vector3(0, 2, 3);
             if (Clickposition == new Vector3(0, 0, 0))
                 insecPoint = Game.CursorPos;
