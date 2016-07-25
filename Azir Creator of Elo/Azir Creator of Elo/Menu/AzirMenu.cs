@@ -146,6 +146,8 @@ namespace Azir_Creator_of_Elo
             _miscMenu = new LeagueSharp.Common.Menu("Misc", "Harash Menu");
             {
                 _miscMenu.AddItem(new MenuItem("FMJ", "Max Range Jump Only").SetTooltip("Cast only jump to max range at flee").SetValue(true));
+                _miscMenu.AddItem(new MenuItem("ARUT", "auto R under the Turret").SetTooltip("Automattly Cast R when enemy is near ally tower").SetValue(true));
+                _miscMenu.AddSubMenu(interruptMenu);
                 _miscMenu.AddSubMenu(interruptMenu);
                 _miscMenu.AddSubMenu(GapCloserMenu);
             }
