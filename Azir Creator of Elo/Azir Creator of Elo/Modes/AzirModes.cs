@@ -26,21 +26,27 @@ namespace Azir_Creator_of_Elo
         {
 
             base.Update(azir);
-            RAllyTower(azir);
+            if (azir.Menu.GetMenu.Item("fleekey").GetValue<KeyBind>().Active)
+            {
+                azir.Orbwalk(Game.CursorPos);
+                Jump(azir);
+            }
 
-            if (!azir.Menu.GetMenu.Item("fleekey").GetValue<KeyBind>().Active) return;
-            azir.Orbwalk(Game.CursorPos);
-            Jump(azir);
+            RAllyTower(azir);
         }
+
+
 
         private void RAllyTower(AzirMain azir)
         {
 
             var useR = azir.Menu.GetMenu.Item("ARUT").GetValue<bool>();
-            var target = TargetSelector.GetTarget(1100, TargetSelector.DamageType.Magical);
-            if (target != null)
+            if (useR)
             {
-                if (useR)
+                var target = TargetSelector.GetTarget(1100, TargetSelector.DamageType.Magical);
+                if (target != null)
+                {
+
                     if (azir.Hero.Distance(target) < 220)
                     {
 
@@ -51,6 +57,7 @@ namespace Azir_Creator_of_Elo
                             azir.Spells.R.Cast(tower.Position);
                         }
                     }
+                }
             }
         }
 
