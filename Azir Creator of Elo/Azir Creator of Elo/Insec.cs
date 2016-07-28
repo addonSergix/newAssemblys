@@ -16,6 +16,7 @@ namespace Azir_Free_elo_Machine
   
     class Insec
     {
+
         public enum Steps
         {
             firstCalcs=0,

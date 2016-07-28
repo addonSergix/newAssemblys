@@ -1,0 +1,16 @@
+C:\Users\sergi\Documents\GitHub\newAssemblys\Azir Creator of Elo\Azir Creator of Elo\bin\Debug\Azir Free elo Machine.exe.config
+C:\Users\sergi\Documents\GitHub\newAssemblys\Azir Creator of Elo\Azir Creator of Elo\bin\Debug\Azir Free elo Machine.exe
+C:\Users\sergi\Documents\GitHub\newAssemblys\Azir Creator of Elo\Azir Creator of Elo\bin\Debug\Azir Free elo Machine.pdb
+C:\Users\sergi\Documents\GitHub\newAssemblys\Azir Creator of Elo\Azir Creator of Elo\bin\Debug\LeagueSharp.Common.dll
+C:\Users\sergi\Documents\GitHub\newAssemblys\Azir Creator of Elo\Azir Creator of Elo\bin\Debug\LeagueSharp.dll
+C:\Users\sergi\Documents\GitHub\newAssemblys\Azir Creator of Elo\Azir Creator of Elo\bin\Debug\SharpDX.dll
+C:\Users\sergi\Documents\GitHub\newAssemblys\Azir Creator of Elo\Azir Creator of Elo\bin\Debug\SharpDX.Direct3D9.dll
+C:\Users\sergi\Documents\GitHub\newAssemblys\Azir Creator of Elo\Azir Creator of Elo\bin\Debug\LeagueSharp.Data.dll
+C:\Users\sergi\Documents\GitHub\newAssemblys\Azir Creator of Elo\Azir Creator of Elo\bin\Debug\clipper_library.dll
+C:\Users\sergi\Documents\GitHub\newAssemblys\Azir Creator of Elo\Azir Creator of Elo\bin\Debug\LeagueSharp.Sandbox.dll
+C:\Users\sergi\Documents\GitHub\newAssemblys\Azir Creator of Elo\Azir Creator of Elo\bin\Debug\Newtonsoft.Json.dll
+C:\Users\sergi\Documents\GitHub\newAssemblys\Azir Creator of Elo\Azir Creator of Elo\obj\Debug\Azir Creator of Elo.csprojResolveAssemblyReference.cache
+C:\Users\sergi\Documents\GitHub\newAssemblys\Azir Creator of Elo\Azir Creator of Elo\obj\Debug\Azir Free elo Machine.exe
+C:\Users\sergi\Documents\GitHub\newAssemblys\Azir Creator of Elo\Azir Creator of Elo\obj\Debug\Azir Free elo Machine.pdb
+C:\Users\sergi\Documents\GitHub\newAssemblys\Azir Creator of Elo\Azir Creator of Elo\bin\Debug\LeagueSharp.Common.pdb
+C:\Users\sergi\Documents\GitHub\newAssemblys\Azir Creator of Elo\Azir Creator of Elo\bin\Debug\LeagueSharp.Data.pdb

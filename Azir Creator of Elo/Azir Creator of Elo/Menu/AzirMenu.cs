@@ -148,7 +148,6 @@ namespace Azir_Creator_of_Elo
                 _miscMenu.AddItem(new MenuItem("FMJ", "Max Range Jump Only").SetTooltip("Cast only jump to max range at flee").SetValue(true));
                 _miscMenu.AddItem(new MenuItem("ARUT", "auto R under the Turret").SetTooltip("Automattly Cast R when enemy is near ally tower").SetValue(true));
                 _miscMenu.AddSubMenu(interruptMenu);
-                _miscMenu.AddSubMenu(interruptMenu);
                 _miscMenu.AddSubMenu(GapCloserMenu);
             }
         }
@@ -169,7 +168,8 @@ namespace Azir_Creator_of_Elo
             {
               _jumpMenu.AddItem(new MenuItem("fleekey", "Jump key").SetValue(new KeyBind('Z', KeyBindType.Press)));
               _jumpMenu.AddItem(new MenuItem("inseckey", "Insec key").SetValue(new KeyBind('T', KeyBindType.Press)));
-           
+                _jumpMenu.AddItem(new MenuItem("insecPos", "Insec Pos").SetValue(new KeyBind('G', KeyBindType.Press)));
+
             }
         }
     }

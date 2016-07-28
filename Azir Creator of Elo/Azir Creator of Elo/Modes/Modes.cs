@@ -38,7 +38,7 @@ namespace Azir_Creator_of_Elo
                     break;
             }
         }
-
+        
         public virtual void Jungleclear(AzirMain azir)
         {
         }

@@ -38,15 +38,19 @@ namespace Azir_Creator_of_Elo
 
             var useR = azir.Menu.GetMenu.Item("ARUT").GetValue<bool>();
             var target = TargetSelector.GetTarget(1100, TargetSelector.DamageType.Magical);
-            if(useR)
-            if (azir.Hero.Distance(target) < 220)
+            if (target != null)
             {
-           
-                           var tower = ObjectManager.Get<Obj_AI_Turret>().FirstOrDefault(it =>it.IsAlly&& it.IsValidTarget(1000));
-                if (tower != null)
-                {
-                    azir.Spells.R.Cast(tower.Position);
-                }
+                if (useR)
+                    if (azir.Hero.Distance(target) < 220)
+                    {
+
+                        var tower =
+                            ObjectManager.Get<Obj_AI_Turret>().FirstOrDefault(it => it.IsAlly && it.IsValidTarget(1000));
+                        if (tower != null)
+                        {
+                            azir.Spells.R.Cast(tower.Position);
+                        }
+                    }
             }
         }
 
